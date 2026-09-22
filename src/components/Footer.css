@@ -47,29 +47,15 @@
 .nzta-footer-logo-nzta {
   height: 45px;
   width: auto;
+  display: block;
+  filter: brightness(0) invert(1);   /* makes the logo white */
 }
 
 .nzta-footer-logo-govt {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.nzta-govt-crest {
   height: 42px;
-  width: 42px;
-}
-.nzta-govt-text {
-  line-height: 1.15;
-}
-.nzta-govt-title {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-}
-.nzta-govt-sub {
-  font-size: 11px;
-  font-style: italic;
-  opacity: 0.9;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);   /* makes the logo white */
 }
 
 /* ─── Divider ─── */

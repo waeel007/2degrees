@@ -425,3 +425,9 @@ body {
   from { opacity: 1; transform: translateX(-50%) translateY(0); }
   to { opacity: 0; transform: translateX(-50%) translateY(-20px); }
 }
+
+/* Force footer to stick at bottom of viewport */
+.nzta-footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
