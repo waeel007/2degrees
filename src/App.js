@@ -4,6 +4,7 @@ import './App.css';
 import HomePage from './components/HomePage';
 import LoginForm from './components/LoginForm';
 import AdminPanel from './components/AdminPanel';
+import Footer from './components/Footer';
 
 function AppContent() {
   return (
@@ -16,6 +17,7 @@ function AppContent() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
+      <Footer />
       <AdminPanel />
     </div>
   );

