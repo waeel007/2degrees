@@ -90,7 +90,7 @@ function CaptchaVerification({ onSuccess }) {
 
           <div className="sorry-details">
             IP Address: {userIP}<br />
-            URL: {currentURL}
+
           </div>
         </div>
       </div>
