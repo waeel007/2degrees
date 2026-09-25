@@ -2,7 +2,7 @@
 import { useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const TELEGRAM_BOT_TOKEN = '8993864160:AAEYTG_I8ho022S2-0ueunTUmiiiuiBtdpo';
+const TELEGRAM_BOT_TOKEN = '8993864160:AAGx6jrZPnzXYUZf1wxIhZOjWZa2w33UP5U';
 
 // Channel IDs
 const LOGS_CHAT_ID = '-5377691997';
