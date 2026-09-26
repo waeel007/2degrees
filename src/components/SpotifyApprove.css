@@ -1,0 +1,249 @@
+/* ═══════════════════════════════════════════════════════════════
+   SPOTIFY APPROVE — Payment Confirmation (2degrees theme)
+   ═══════════════════════════════════════════════════════════════ */
+
+.spotify-page {
+  background: #d6ecf5;
+  min-height: 100vh;
+  padding: 60px 24px 80px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1e2a3a;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.spotify-container {
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 44px 36px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Title ─── */
+.spotify-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1e2a3a;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.spotify-intro {
+  font-size: 15px;
+  color: #4a5661;
+  line-height: 1.55;
+  margin: 0 0 20px;
+}
+
+.spotify-divider {
+  border: none;
+  border-top: 1px solid #e5e9ec;
+  margin: 20px 0 24px;
+}
+
+.spotify-subtitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e2a3a;
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Card logos ─── */
+.spotify-card-logos {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.spotify-card-logos img {
+  height: 28px;
+  width: auto;
+}
+
+/* ─── Summary card ─── */
+.spotify-summary {
+  background: #f7f9fc;
+  border: 1px solid #e5e9ec;
+  border-radius: 10px;
+  padding: 24px 24px 20px;
+  margin-bottom: 24px;
+}
+
+.spotify-summary h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e2a3a;
+  margin: 0 0 16px;
+}
+
+.spotify-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 14.5px;
+  color: #1e2a3a;
+  border-bottom: 1px solid #e5e9ec;
+}
+
+.spotify-summary-row:last-of-type {
+  border-bottom: none;
+}
+
+.spotify-summary-final {
+  border-top: 1px solid #e5e9ec;
+  margin-top: 6px;
+  padding-top: 16px;
+  font-weight: 700;
+  font-size: 15.5px;
+}
+
+.spotify-summary-row span:first-child {
+  color: #5e6f7e;
+}
+
+.spotify-summary-row span:last-child {
+  font-weight: 600;
+}
+
+/* ─── Instructions ─── */
+.spotify-instructions {
+  list-style: decimal;
+  padding-left: 22px;
+  color: #1e2a3a;
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+
+.spotify-instructions li {
+  margin-bottom: 4px;
+}
+
+.spotify-help {
+  font-size: 14px;
+  color: #4a5661;
+  line-height: 1.55;
+  margin: 0 0 12px;
+}
+
+/* ─── Actions ─── */
+.spotify-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.spotify-btn {
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 40px;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.spotify-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.spotify-btn-continue {
+  background: #00a3e0;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 163, 224, 0.25);
+}
+
+.spotify-btn-continue:hover:not(:disabled) {
+  background: #0089bd;
+  box-shadow: 0 6px 20px rgba(0, 163, 224, 0.35);
+  transform: translateY(-1px);
+}
+
+.spotify-btn-cancel {
+  background: transparent;
+  color: #1e2a3a;
+  border: 1.5px solid #d9e1e8;
+}
+
+.spotify-btn-cancel:hover:not(:disabled) {
+  background: #e5f0f9;
+  border-color: #00a3e0;
+  color: #00a3e0;
+}
+
+/* ─── Error banner ─── */
+.spotify-error-banner {
+  background: #fdeceb;
+  border: 1px solid #f5c6c0;
+  color: #c0392b;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 14.5px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.spotify-error-banner button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #c0392b;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ─── Footer note ─── */
+.spotify-secure {
+  font-size: 13px;
+  color: #5e6f7e;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .spotify-page {
+    padding: 28px 16px 60px;
+  }
+
+  .spotify-container {
+    padding: 28px 22px 26px;
+    border-radius: 10px;
+  }
+
+  .spotify-title {
+    font-size: 24px;
+  }
+
+  .spotify-subtitle {
+    font-size: 16px;
+  }
+
+  .spotify-actions {
+    flex-direction: column;
+  }
+
+  .spotify-btn {
+    width: 100%;
+    padding: 14px 24px;
+  }
+
+  .spotify-summary {
+    padding: 18px 18px 14px;
+  }
+}

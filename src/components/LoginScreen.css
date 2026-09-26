@@ -1,598 +1,887 @@
-/* ─── NZTA Renewal Page ─── */
-.nzta-renewal {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-  color: #1a1a1a;
-  background: #f4f4f4;
-  min-height: 100vh;
-}
+/* ═══════════════════════════════════════════════════════════════
+   2DEGREES PAY MONTHLY STYLE
+   ═══════════════════════════════════════════════════════════════ */
 
-/* Header */
-.nzta-header {
-  background: #0b3b5c;
-  padding: 14px 0;
-}
-.nzta-header-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  justify-content: flex-start;   /* ← left-align everything */
-  gap: 24px;                     /* ← space between logo and button */
-}
-.nzta-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #fff;
-}
-.nzta-logo-text {
-  line-height: 1.05;
-}
-.nzta-logo-title {
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.3px;
-}
-.nzta-logo-sub {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
-.nzta-logo-maori {
-  font-size: 11px;
-  font-style: italic;
-  opacity: 0.85;
-}
-.nzta-services-tab {
-  background: #fff;
-  color: #0b3b5c;
-  padding: 8px 18px;
-  border-radius: 4px;
-  font-weight: 700;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Main */
-.nzta-main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 28px 24px 60px;
-}
-.nzta-back {
-  color: #0b3b5c;
-  text-decoration: none;
-  font-size: 14px;
-  display: inline-block;
-  margin-bottom: 8px;
-}
-.nzta-back:hover { text-decoration: underline; }
-
-.nzta-title {
-  font-size: 26px;
-  font-weight: 700;
-  color: #0b3b5c;
-  margin: 0 0 24px;
-}
-
-/* Steps */
-.nzta-steps {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-  padding: 0;
-  margin: 0 0 16px;
-  flex-wrap: wrap;
-}
-.nzta-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  min-width: 120px;
-  text-align: center;
-}
-.nzta-step-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid #b6c2cb;
-  color: #6b7780;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  background: #fff;
-}
-.nzta-step.active .nzta-step-circle {
-  background: #2e9e5b;
-  border-color: #2e9e5b;
-  color: #fff;
-}
-.nzta-step-label {
-  font-size: 12.5px;
-  color: #6b7780;
-}
-.nzta-step.active .nzta-step-label {
-  color: #1a1a1a;
-  font-weight: 600;
-}
-
-.nzta-divider {
-  border: none;
-  border-top: 1px solid #d8dde1;
-  margin: 14px 0 20px;
-}
-
-.nzta-hint {
-  color: #4a5661;
-  font-size: 13.5px;
-  margin-bottom: 20px;
-}
-
-.nzta-subtitle {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0b3b5c;
-  margin: 0 0 18px;
-}
-
-/* Fields */
-.nzta-field {
-  margin-bottom: 22px;
-}
-.nzta-field label {
-  display: block;
-  font-weight: 600;
-  font-size: 14.5px;
-  margin-bottom: 8px;
-  color: #1a1a1a;
-}
-.nzta-input {
-  width: 100%;
-  max-width: 320px;
-  padding: 10px 12px;
-  border: 1px solid #8a97a0;
-  border-radius: 3px;
-  font-size: 15px;
-  background: #fff;
+* {
   box-sizing: border-box;
 }
-.nzta-input:focus {
-  outline: 2px solid #2d7a9e;
-  outline-offset: 1px;
-}
-.nzta-input.input-error-red {
-  border-color: #d33;
-}
-.nzta-help {
-  display: block;
-  font-size: 12.5px;
-  color: #4a5661;
-  margin-top: 6px;
-  max-width: 560px;
-  line-height: 1.45;
+
+.nzta-renewal {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1e2a3a;
+  background: #d6ecf5;
+  min-height: 100vh;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
 }
 
-/* Month grid */
-.nzta-months-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(80px, 1fr));
-  gap: 0;
-  max-width: 640px;
-  border: 1px solid #8a97a0;
+/* ─── HEADER ─── */
+.nzta-header {
   background: #fff;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e9ec;
 }
-.nzta-month-btn {
-  background: #fff;
+
+.nzta-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.nzta-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* ─── MAIN ─── */
+.nzta-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+/* ─── TITLE & INTRO ─── */
+.nzta-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #1e2a3a;
+  margin: 0 0 20px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.nzta-intro {
+  font-size: 18px;
+  color: #4a5661;
+  max-width: 700px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.nzta-intro a {
+  color: #1e2a3a;
+  text-decoration: underline;
+}
+
+/* ─── TABS ─── */
+.nzta-tabs {
+  display: flex;
+  gap: 40px;
+  border-bottom: 1px solid #d9e1e8;
+  margin-bottom: 40px;
+}
+
+.nzta-tab {
+  background: none;
   border: none;
-  border-right: 1px solid #8a97a0;
-  border-bottom: 1px solid #8a97a0;
-  padding: 12px 6px;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #5e6f7e;
   cursor: pointer;
+  font-family: inherit;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.nzta-tab.active {
+  color: #1e2a3a;
+  border-bottom-color: #1e2a3a;
+}
+
+.nzta-tab:hover {
+  color: #1e2a3a;
+}
+
+/* ─── PLAN CARDS ─── */
+.nzta-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.nzta-card {
+  background: #fff;
+  position: relative;
+  border-radius: 12px;
+  padding: 32px 28px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  font-family: inherit;
-  transition: background 0.15s;
 }
-.nzta-month-btn:nth-child(6n) { border-right: none; }
-.nzta-month-btn:nth-child(n+7) { border-bottom: none; }
-.nzta-month-btn:hover { background: #eef6fa; }
-.nzta-month-btn.selected {
-  background: #2d7a9e;
-  color: #fff;
-}
-.nzta-month-num {
-  font-size: 16px;
-  font-weight: 700;
-  color: #0b3b5c;
-}
-.nzta-month-btn.selected .nzta-month-num { color: #fff; }
-.nzta-month-lbl {
-  font-size: 12px;
-  color: #4a5661;
-}
-.nzta-month-btn.selected .nzta-month-lbl { color: #fff; }
 
-/* Checkbox */
-.nzta-checkbox-row {
+.nzta-card-price {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 14px 0 20px;
-  font-size: 14.5px;
-}
-
-/* Total card */
-.nzta-total-card {
-  border: 1px solid #b6c2cb;
-  border-radius: 4px;
-  padding: 20px 24px;
-  background: #fff;
-  max-width: 560px;
-  margin: 24px 0;
-}
-.nzta-total-card h3 {
-  margin: 0 0 16px;
-  font-size: 18px;
-  color: #1a1a1a;
-}
-.nzta-total-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  font-size: 14.5px;
-  color: #1a1a1a;
-}
-.nzta-total-final {
-  border-top: 1px solid #d8dde1;
-  margin-top: 6px;
-  padding-top: 14px;
-  font-weight: 700;
-}
-
-/* Error */
-.nzta-error-banner {
-  background: #fdecea;
-  border: 1px solid #f5c6c0;
-  color: #b3261e;
-  padding: 10px 14px;
-  border-radius: 4px;
-  font-size: 14px;
-  max-width: 560px;
+  align-items: baseline;
+  gap: 4px;
   margin-bottom: 16px;
 }
 
-/* Actions */
-.nzta-actions {
+.nzta-price {
+  font-size: 48px;
+  font-weight: 800;
+  color: #1e2a3a;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.nzta-period {
+  font-size: 16px;
+  color: #5e6f7e;
+  font-weight: 500;
+}
+
+.nzta-card-data {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e5f0f9;
+}
+
+.nzta-gb {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e2a3a;
+  line-height: 1.2;
+}
+
+.nzta-data-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e2a3a;
+}
+
+.nzta-card-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.nzta-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffc107;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.nzta-card-feature p {
+  font-size: 14px;
+  color: #4a5661;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.nzta-card-feature strong {
+  color: #1e2a3a;
+}
+
+.nzta-card-divider {
+  height: 1px;
+  background: #e5e9ec;
+  margin: 16px 0;
+}
+
+.nzta-card-list p {
+  font-size: 14px;
+  color: #1e2a3a;
+  margin: 0 0 6px;
+}
+
+.nzta-card-perks p {
+  font-size: 14px;
+  color: #1e2a3a;
+  margin: 0 0 6px;
+}
+
+.nzta-card-perks strong {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WHAT YOU'LL LOVE — EXACT MATCH
+   ═══════════════════════════════════════════════════════════════ */
+
+.nzta-love-section {
+  padding: 60px 40px;
+  margin: 0 -24px 80px;
+  text-align: left;
+}
+
+.nzta-love-title {
+  display: none;
+}
+
+.nzta-love-sub {
+  display: none;
+}
+
+.nzta-love-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.nzta-love-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 18px;
+  margin: -20px -18px;
+  border-radius: 8px;
+  background: transparent;
+  transition: all 0.25s ease;
+}
+
+/* ─── HOVER EFFECT ─── */
+.nzta-love-item:hover {
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+.nzta-love-img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.nzta-love-item h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e2a3a;
+  margin: 0 0 10px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.nzta-love-item p {
+  font-size: 15px;
+  font-weight: 400;
+  color: #1e2a3a;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .nzta-love-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nzta-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .nzta-main {
+    padding: 32px 16px 60px;
+  }
+
+  .nzta-title {
+    font-size: 32px;
+  }
+
+  .nzta-intro {
+    font-size: 16px;
+  }
+
+  .nzta-tabs {
+    gap: 20px;
+    overflow-x: auto;
+  }
+
+  .nzta-tab {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .nzta-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .nzta-love-section {
+    padding: 40px 20px;
+    margin: 0 -16px 60px;
+  }
+
+  .nzta-love-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 20px;
+  }
+
+  .nzta-love-img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 14px;
+  }
+
+  .nzta-love-item h3 {
+    font-size: 16px;
+  }
+
+  .nzta-love-item p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .nzta-love-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ─── THINGS TO KNOW LINK (Unlimited card) ─── */
+.nzta-card-link {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e9ec;
+}
+
+.nzta-card-link a {
+  color: #0066b4;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.nzta-card-link a:hover {
+  color: #0059a0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ADD TO CART BUTTON
+   ═══════════════════════════════════════════════════════════════ */
+
+.nzta-add-to-cart {
+  width: 100%;
+  padding: 14px 24px;
+  margin-top: 20px;
+  background: #e5f0f9;
+  color: #1e2a3a;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nzta-add-to-cart:hover {
+  background: #0066b4;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 102, 180, 0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODAL — ADDED TO CART
+   ═══════════════════════════════════════════════════════════════ */
+
+.nzta-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.nzta-modal {
+  background: #fff;
+  border-radius: 8px;
+  padding: 36px 40px 32px;
+  max-width: 560px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.nzta-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e2a3a;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.nzta-modal-close:hover {
+  color: #0066b4;
+}
+
+.nzta-modal-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1e2a3a;
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.nzta-modal-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #e5f0f9;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+}
+
+.nzta-modal-emoji {
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.nzta-modal-notice p {
+  font-size: 15px;
+  color: #1e2a3a;
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.nzta-modal-plan {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 8px 0 24px;
+}
+
+.nzta-modal-plan-icon {
+  font-size: 32px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.nzta-modal-plan-info p {
+  margin: 0 0 4px;
+  color: #1e2a3a;
+}
+
+.nzta-modal-plan-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nzta-modal-plan-data {
+  font-size: 15px;
+  color: #4a5661;
+}
+
+.nzta-modal-plan-price {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 6px !important;
+}
+
+.nzta-modal-actions {
   display: flex;
   gap: 12px;
   margin-top: 8px;
 }
-.nzta-btn {
-  padding: 10px 26px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 3px;
-  cursor: pointer;
+
+.nzta-modal-btn {
+  flex: 1;
+  padding: 16px 24px;
+  background: #0095da;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
   font-family: inherit;
-  border: 1px solid transparent;
-}
-.nzta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-.nzta-btn-continue {
-  background: #cfd6db;
-  color: #4a5661;
-  border-color: #cfd6db;
-}
-.nzta-btn-continue:hover:not(:disabled) {
-  background: #0b3b5c;
-  color: #fff;
-  border-color: #0b3b5c;
-}
-.nzta-btn-cancel {
-  background: #fff;
-  color: #0b3b5c;
-  border-color: #0b3b5c;
-}
-.nzta-btn-cancel:hover:not(:disabled) {
-  background: #eef6fa;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Responsive */
+.nzta-modal-btn:hover {
+  background: #007bb8;
+  box-shadow: 0 6px 20px rgba(0, 149, 218, 0.35);
+}
+
+/* ✅ Secondary button — outline style (like View Cart but reversed) */
+.nzta-modal-btn-secondary {
+  background: transparent;
+  color: #0095da;
+  border: 1.5px solid #0095da;
+  box-shadow: none;
+}
+
+.nzta-modal-btn-secondary:hover {
+  background: #e5f0f9;
+  color: #007bb8;
+  border-color: #007bb8;
+  box-shadow: none;
+}
+
+.nzta-modal-btn:hover {
+  background: #007bb8;
+  box-shadow: 0 6px 20px rgba(0, 149, 218, 0.35);
+}
+
 @media (max-width: 640px) {
-  .nzta-steps { gap: 18px; }
-  .nzta-step { min-width: 70px; }
-  .nzta-step-label { font-size: 11px; }
-  .nzta-months-grid { grid-template-columns: repeat(3, 1fr); }
-  .nzta-month-btn:nth-child(6n) { border-right: 1px solid #8a97a0; }
-  .nzta-month-btn:nth-child(3n) { border-right: none; }
-  .nzta-input { max-width: 100%; }
-}
-/* ─── Logo (M image + text) ─── */
-.nzta-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #fff;
-}
-
-.nzta-logo-img {
-  height: 42px;
-  width: auto;
-  display: block;
-}
-
-.nzta-logo-text {
-  line-height: 1.05;
-  color: #fff;
-}
-
-.nzta-logo-title {
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-}
-
-.nzta-logo-sub {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.nzta-logo-maori {
-  font-size: 11px;
-  font-style: italic;
-  opacity: 0.9;
-}
-.nzta-logo-img {
-  height: 55px;
-  width: auto;
-  display: block;
-  filter: brightness(0) invert(1);
-}
-/* ─── Helpers for CardVerificationForm ─── */
-.nzta-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.nzta-row .nzta-input {
-  max-width: 160px;
-}
-.nzta-error-msg {
-  display: block;
-  color: #b3261e;
-  font-size: 12.5px;
-  margin-top: 6px;
-}
-.nzta-country-select {
-  max-width: 240px !important;
-}
-.nzta-step.done .nzta-step-circle {
-  background: #0b3b5c;
-  border-color: #0b3b5c;
-  color: #fff;
-}
-/* Instructions list for payment page */
-.nzta-instructions {
-  list-style: disc;
-  padding-left: 22px;
-  color: #1a1a1a;
-  font-size: 14.5px;
-  line-height: 1.7;
-  max-width: 620px;
-  margin: 0 0 24px;
-}
-.nzta-instructions li {
-  margin-bottom: 4px;
-}
-/* ═══════════════════════════════════════════
-   MOBILE — iPhone, Android (max-width: 640px)
-   ═══════════════════════════════════════════ */
-@media (max-width: 640px) {
-  html, body, #root {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  .nzta-modal {
+    padding: 28px 24px 24px;
   }
-
-  .nzta-renewal {
-    width: 100%;
-    padding: 0;
-  }
-
-  /* Header */
-  .nzta-header {
-    padding: 10px 0;
-  }
-  .nzta-header-inner {
-    max-width: 100%;
-    padding: 0 14px;
-    gap: 10px;
-    justify-content: space-between;
-  }
-  .nzta-logo-img {
-    height: 34px;
-  }
-  .nzta-services-tab {
-    padding: 6px 10px;
-    font-size: 11.5px;
-    gap: 5px;
-  }
-  .nzta-services-tab svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Main — full width, left aligned */
-  .nzta-main {
-    max-width: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 20px 16px 40px;
-    box-sizing: border-box;
-    text-align: left;
-  }
-
-  /* Titles */
-  .nzta-title {
-    font-size: 20px;
-    line-height: 1.25;
-    margin-bottom: 16px;
-    text-align: left;
-  }
-  .nzta-subtitle {
-    font-size: 17px;
-    margin-bottom: 14px;
-    text-align: left;
-  }
-  .nzta-hint,
-  .nzta-help {
-    font-size: 12px;
-    max-width: 100%;
-    text-align: left;
-  }
-
-  /* Steps — one row, smaller, connected */
-  .nzta-steps {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0;
-    width: 100%;
-    margin: 18px 0 14px;
-  }
-  .nzta-step {
-    flex: 0 0 auto;
-    min-width: 0;
-    text-align: center;
-  }
-  .nzta-step-circle {
-    width: 30px;
-    height: 30px;
-    font-size: 13px;
-  }
-  .nzta-step-label {
-    font-size: 10px;
-    max-width: 80px;
-    line-height: 1.15;
-    white-space: normal;
-  }
-  .nzta-step-line {
-    flex: 1 1 auto;
-    height: 2px;
-    background: #d8dde1;
-    margin-top: 14px;
-    margin-bottom: 0;
-    align-self: flex-start;
-  }
-
-  /* Fields */
-  .nzta-field {
-    margin-bottom: 18px;
-  }
-  .nzta-field label {
-    font-size: 13.5px;
-  }
-  .nzta-input {
-    max-width: 100%;
-    width: 100%;
-    font-size: 15px;
-    padding: 11px 12px;
-  }
-  .nzta-row {
+  .nzta-modal-actions {
     flex-direction: column;
-    gap: 10px;
-  }
-  .nzta-row .nzta-input {
-    max-width: 100%;
-  }
-  .nzta-country-select {
-    max-width: 100% !important;
   }
 
-  /* Months grid — 3 per row */
-  .nzta-months-grid {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 100%;
+  .nzta-modal-title {
+    font-size: 26px;
   }
-  .nzta-month-btn:nth-child(6n) {
-    border-right: 1px solid #8a97a0;
+
+  .nzta-modal-notice {
+    padding: 16px;
   }
-  .nzta-month-btn:nth-child(3n) {
-    border-right: none;
+
+  .nzta-modal-emoji {
+    font-size: 24px;
   }
-  .nzta-month-btn:nth-child(n+7) {
-    border-bottom: 1px solid #8a97a0;
-  }
-  .nzta-month-btn:nth-child(n+10) {
-    border-bottom: none;
-  }
-  .nzta-month-btn {
-    padding: 10px 4px;
-  }
-  .nzta-month-num {
+
+  .nzta-modal-notice p {
     font-size: 14px;
   }
-  .nzta-month-lbl {
-    font-size: 11px;
+}
+.nzta-price-old {
+  font-size: 24px;
+  font-weight: 600;
+  color: #a0a0a0;
+  text-decoration: line-through;
+  margin-right: 8px;
+  letter-spacing: -0.01em;
+}
+.nzta-card-promo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #e60000;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+/* ═══════════════════════════════════════════════════════════════
+   CART MODAL — YOUR CART
+   ═══════════════════════════════════════════════════════════════ */
+
+.nzta-cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 42, 58, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+.nzta-cart-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 36px 40px 32px;
+  max-width: 560px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.25s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.nzta-cart-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e2a3a;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+}
+
+.nzta-cart-close:hover {
+  color: #0066b4;
+}
+
+.nzta-cart-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e2a3a;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.nzta-cart-count {
+  font-size: 14px;
+  color: #5e6f7e;
+  margin: 0 0 24px;
+}
+
+.nzta-cart-plan {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px solid #e5e9ec;
+  border-bottom: 1px solid #e5e9ec;
+}
+
+.nzta-cart-plan-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.nzta-cart-plan-info {
+  flex: 1;
+}
+
+.nzta-cart-plan-info p {
+  margin: 0 0 4px;
+  color: #1e2a3a;
+}
+
+.nzta-cart-plan-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.nzta-cart-plan-data {
+  font-size: 14px;
+  color: #5e6f7e;
+}
+
+.nzta-cart-plan-price {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 4px !important;
+}
+
+.nzta-cart-remove {
+  background: none;
+  border: none;
+  color: #0066b4;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.nzta-cart-remove:hover {
+  color: #0059a0;
+}
+
+.nzta-cart-summary {
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e9ec;
+}
+
+.nzta-cart-summary-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e2a3a;
+  margin: 0 0 12px;
+}
+
+.nzta-cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #1e2a3a;
+  margin-bottom: 8px;
+}
+
+.nzta-cart-summary-note {
+  font-size: 12px;
+  color: #5e6f7e;
+  margin: 0;
+}
+
+.nzta-cart-email-msg {
+  font-size: 14px;
+  color: #1e2a3a;
+  margin: 24px 0 16px;
+  line-height: 1.5;
+}
+
+.nzta-cart-field {
+  margin-bottom: 20px;
+}
+
+.nzta-cart-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e2a3a;
+  margin-bottom: 8px;
+}
+
+.nzta-cart-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #d9e1e8;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1e2a3a;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.nzta-cart-input:focus {
+  outline: none;
+  border-color: #0066b4;
+  box-shadow: 0 0 0 3px rgba(0, 102, 180, 0.15);
+}
+
+.nzta-cart-checkout {
+  width: 100%;
+  padding: 16px 24px;
+  background: #0095da;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nzta-cart-checkout:hover {
+  background: #007bb8;
+  box-shadow: 0 6px 20px rgba(0, 149, 218, 0.35);
+}
+
+@media (max-width: 640px) {
+  .nzta-cart-modal {
+    padding: 28px 24px 24px;
   }
 
-  /* Total card — full width */
-  .nzta-total-card {
-    max-width: 100%;
-    padding: 16px;
-    margin: 18px 0;
+  .nzta-cart-title {
+    font-size: 24px;
   }
-  .nzta-total-card h3 {
-    font-size: 15px;
-  }
-  .nzta-total-row {
-    font-size: 13px;
-    padding: 8px 0;
-  }
+}
+/* ─── Multi-item cart ─── */
+.nzta-cart-plans {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
 
-  /* Buttons — stacked, full width */
-  .nzta-actions {
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .nzta-btn {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 15px;
-    text-align: center;
-  }
+.nzta-cart-plan {
+  border-top: none;
+  border-bottom: 1px solid #e5e9ec;
+  padding: 16px 0;
+}
 
-  /* Instructions */
-  .nzta-instructions {
-    font-size: 13px;
-    padding-left: 18px;
-    max-width: 100%;
-  }
+.nzta-cart-plan:last-child {
+  border-bottom: none;
+}
+/* ─── Cart Actions ─── */
+.nzta-cart-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
 
-  /* Error banner */
-  .nzta-error-banner {
-    max-width: 100%;
-    font-size: 13px;
-  }
+.nzta-cart-checkout {
+  width: 100%;
+  padding: 16px 24px;
+  background: #0095da;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-  /* Card icons (visa / mastercard) */
-  .nzta-main img[alt="VISA"],
-  .nzta-main img[alt="Mastercard"] {
-    height: 22px !important;
-  }
+.nzta-cart-checkout:hover:not(:disabled) {
+  background: #007bb8;
+  box-shadow: 0 6px 20px rgba(0, 149, 218, 0.35);
+}
+
+.nzta-cart-checkout:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nzta-cart-continue {
+  width: 100%;
+  padding: 15px 24px;
+  background: transparent;
+  color: #1e2a3a;
+  border: 1.5px solid #d9e1e8;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nzta-cart-continue:hover {
+  background: #e5f0f9;
+  border-color: #00a3e0;
+  color: #00a3e0;
 }

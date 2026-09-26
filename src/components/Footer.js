@@ -1,45 +1,84 @@
 import React from 'react';
 import './Footer.css';
-import nztaLogo from '../assets/nzta-logo.png';
-import nzGov from '../assets/nzgov.png';
 
 function Footer() {
   return (
-    <footer className="nzta-footer">
-      {/* ─── Top row: links + logos ─── */}
-      <div className="nzta-footer-top">
-        <div className="nzta-footer-links">
-          <a href="https://www.nzta.govt.nz/contact-us" target="_blank" rel="noopener noreferrer">Contact</a>
-          <a href="https://www.nzta.govt.nz/about-us/copyright" target="_blank" rel="noopener noreferrer">Copyright</a>
-          <a href="https://www.nzta.govt.nz/about-us/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
-        </div>
+    <footer className="twodegrees-footer">
+      {/* ─── Top section (blue) ─── */}
+      <div className="twodegrees-footer-top">
+        <div className="twodegrees-footer-inner">
 
-        <div className="nzta-footer-logos">
-          {/* NZ Transport Agency logo */}
-          <img
-            src={nztaLogo}
-            alt="NZ Transport Agency Waka Kotahi"
-            className="nzta-footer-logo-nzta"
-          />
+          {/* Column 1: Follow us */}
+          <div className="twodegrees-footer-col">
+            <h4 className="twodegrees-footer-heading">Follow us</h4>
+            <ul className="twodegrees-footer-list twodegrees-footer-social">
+              <li><a href="#"><span className="twodegrees-footer-icon">f</span> Facebook</a></li>
+              <li><a href="#"><span className="twodegrees-footer-icon">𝕏</span> X (Twitter)</a></li>
+              <li><a href="#"><span className="twodegrees-footer-icon">◎</span> Instagram</a></li>
+              <li><a href="#"><span className="twodegrees-footer-icon">▶</span> YouTube</a></li>
+              <li><a href="#"><span className="twodegrees-footer-icon">in</span> LinkedIn</a></li>
+            </ul>
+          </div>
 
-          {/* NZ Government logo */}
-          <img
-            src={nzGov}
-            alt="New Zealand Government"
-            className="nzta-footer-logo-govt"
-          />
+          {/* Column 2: About */}
+          <div className="twodegrees-footer-col">
+            <h4 className="twodegrees-footer-heading">About 2degrees</h4>
+            <ul className="twodegrees-footer-list">
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Join our team</a></li>
+              <li><a href="#">2degrees App</a></li>
+              <li><a href="#">Data Clock</a></li>
+              <li><a href="#">Fighting for Fair</a></li>
+              <li><a href="#">News &amp; Media Releases</a></li>
+              <li><a href="#">Coverage</a></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Shop */}
+          <div className="twodegrees-footer-col">
+            <h4 className="twodegrees-footer-heading">Shop</h4>
+            <ul className="twodegrees-footer-list">
+              <li><a href="#">Mobile phones</a></li>
+              <li><a href="#">Wearables</a></li>
+              <li><a href="#">Tablets</a></li>
+              <li><a href="#">Hello Deals</a></li>
+              <li><a href="#">Trade In</a></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Fighting for Fair logo */}
+          <div className="twodegrees-footer-col twodegrees-footer-brand">
+            <div className="twodegrees-footer-brand-text">
+              FIGHTING<br />FOR FAIR
+            </div>
+            <img src={require('../assets/2dlogo.png')} alt="2degrees" className="twodegrees-footer-brand-logo" />
+          </div>
+
         </div>
       </div>
 
-      {/* ─── Divider ─── */}
-      <div className="nzta-footer-divider" />
+      {/* ─── Bottom section (dark) ─── */}
+      <div className="twodegrees-footer-bottom">
+        <div className="twodegrees-footer-inner twodegrees-footer-bottom-inner">
 
-      {/* ─── Bottom row: copyright + badge ─── */}
-      <div className="nzta-footer-bottom">
-        <span className="nzta-footer-copy">
-          © {new Date().getFullYear()} NZ Transport Agency, all rights reserved
-        </span>
-        <span className="nzta-footer-badge" aria-hidden="true">🏛</span>
+          <div className="twodegrees-footer-copy">
+            © Two Degrees Mobile Limited {new Date().getFullYear()}.<br />
+            All rights reserved.
+          </div>
+
+          <div className="twodegrees-footer-legal">
+            <a href="#">Accessibility</a>
+            <span className="twodegrees-footer-sep">|</span>
+            <a href="#">Privacy Policy</a>
+            <span className="twodegrees-footer-sep">|</span>
+            <a href="#">Terms and Conditions</a>
+          </div>
+
+          <div className="twodegrees-footer-badge" aria-hidden="true">
+
+          </div>
+
+        </div>
       </div>
     </footer>
   );

