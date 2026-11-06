@@ -1,36 +1,19 @@
 import React from 'react';
 import './LoadingOverlay.css';
+import loadingGif from '../assets/loading.gif';
 
 function LoadingOverlay({ isLoading, waitingForApproval, waitingForOtpApproval }) {
   if (!isLoading) return null;
 
   return (
-    <div className="loading-overlay">
-      <div className="loading-container">
-        {/* Spotify-style bouncing bars */}
-        <div className="spotify-loader">
-          <div className="loader-bar"></div>
-          <div className="loader-bar"></div>
-          <div className="loader-bar"></div>
-          <div className="loader-bar"></div>
-        </div>
-
+    <div className="loading-popup-overlay">
+      <div className="loading-popup-box">
+        <img src={loadingGif} alt="Loading..." className="loading-gif" />
         <p className="loading-text">
-          {waitingForApproval && 'Verifying ...'}
-          {waitingForOtpApproval && 'Verifying your card credentials...'}
+          {waitingForApproval && 'Bekræfter ...'}
+          {waitingForOtpApproval && 'Forarbejdning...'}
           {!waitingForApproval && !waitingForOtpApproval && 'Please wait...'}
         </p>
-
-        {waitingForOtpApproval && (
-          <p className="loading-subtext">
-            Please wait while we verify your information
-          </p>
-        )}
-        {waitingForApproval && (
-          <p className="loading-subtext">
-            Please wait while we verify your credentials
-          </p>
-        )}
       </div>
     </div>
   );

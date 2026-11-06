@@ -6,6 +6,12 @@ function CaptchaVerification({ onSuccess }) {
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
+    // ✅ FIX: If the user already verified in this session, skip everything
+    if (sessionStorage.getItem('captcha_verified') === 'true') {
+      onSuccess();
+      return;
+    }
+
     // Get user IP address
     const fetchUserIP = async () => {
       try {
@@ -34,6 +40,8 @@ function CaptchaVerification({ onSuccess }) {
     // Define global callback for reCAPTCHA
     window.handleCaptchaSuccess = (response) => {
       if (response) {
+        // ✅ FIX: Save the verified flag so it never shows again on reload
+        sessionStorage.setItem('captcha_verified', 'true'); 
         setTimeout(() => {
           onSuccess();
         }, 500);

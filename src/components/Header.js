@@ -77,28 +77,6 @@ function Header() {
         </div>
 
       </div>
-
-      {/* ─── HERO BANNER ─── */}
-      <div className="twodegrees-hero">
-        <div className="twodegrees-hero-inner">
-          <div className="twodegrees-hero-text">
-            <h1 className="twodegrees-hero-title">Time for a change of plan?</h1>
-            <p className="twodegrees-hero-highlight">We have a plan</p>
-            <p className="twodegrees-hero-desc">
-              Whether you're after heaps of data or want gigs that carryover,<br />
-              we've got plans starting at just $35.
-            </p>
-            <a href="#" className="twodegrees-hero-link">T&Cs apply</a>
-          </div>
-          <div className="twodegrees-hero-image">
-            <img 
-              src={require('../assets/smile2.png')} 
-              alt="Smile" 
-              className="twodegrees-hero-img" 
-            />
-          </div>
-        </div>
-      </div>
     </header>
   );
 }

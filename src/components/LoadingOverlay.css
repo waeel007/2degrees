@@ -1,63 +1,49 @@
-.loading-overlay {
+.loading-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10000;
-  animation: fadeIn 0.2s ease;
+  z-index: 99999;
+  /* No pointer-events:none — this lets the popup be visible and interactable */
 }
 
-.loading-container {
-  text-align: center;
-}
-
-/* Spotify bouncing bars */
-.spotify-loader {
+.loading-popup-box {
+  background-color: #ffffff;
+  padding: 30px 50px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 5px;
-  height: 50px;
-  margin-bottom: 24px;
+  flex-direction: column;
+  align-items: center;
+  animation: popupFadeIn 0.3s ease;
 }
 
-.loader-bar {
-  width: 4px;
-  height: 15px;
-  background: #1ed760;
-  border-radius: 2px;
-  animation: bounce 0.6s ease-in-out infinite;
-}
-
-.loader-bar:nth-child(1) { animation-delay: 0s; }
-.loader-bar:nth-child(2) { animation-delay: 0.1s; }
-.loader-bar:nth-child(3) { animation-delay: 0.2s; }
-.loader-bar:nth-child(4) { animation-delay: 0.3s; }
-
-@keyframes bounce {
-  0%, 100% { height: 15px; opacity: 0.5; }
-  50% { height: 50px; opacity: 1; }
+.loading-gif {
+  width: 80px;
+  height: auto;
+  margin-bottom: 15px;
 }
 
 .loading-text {
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 8px;
-}
-
-.loading-subtext {
-  color: #aaa;
-  font-size: 14px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1a1a1a;
   margin: 0;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

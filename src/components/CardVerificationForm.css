@@ -1,219 +1,217 @@
 /* ═══════════════════════════════════════════════════════════════
-   CARD VERIFICATION FORM — 2degrees theme
+   LAYOUT
    ═══════════════════════════════════════════════════════════════ */
 
-.cardv-page {
-  background: #d6ecf5;
-  min-height: 100vh;
-  padding: 60px 24px 80px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  color: #1e2a3a;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
+* { box-sizing: border-box; }
 
-.cardv-container {
-  max-width: 560px;
+/* The magic class — constrains header content to the same width as the form */
+.punktum-content-limit {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1em;
   width: 100%;
-  background: #fff;
-  border-radius: 12px;
-  padding: 40px 44px 36px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ─── Title ─── */
-.cardv-title {
-  font-size: 32px;
-  font-weight: 800;
-  color: #1e2a3a;
-  margin: 0 0 12px;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+/* ═══════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Top Black Bar — background spans 100%, content is centered inside */
+.punktum-top-bar {
+  background-color: #262626;
+  height: 37px;
+  width: 100%;
+}
+.punktum-top-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+  font-size: 0.875em;
+  font-weight: bold;
+  width: 100%;
+}
+.punktum-top-menu li a {
+  color: #f2f2f2;
+  text-decoration: none;
+}
+.punktum-top-menu li a:hover {
+  text-decoration: underline;
+}
+.punktum-top-menu li.divider {
+  color: rgba(242, 242, 242, 0.3);
+}
+.punktum-login-link a {
+  border-left: 1px solid rgba(242, 242, 242, 0.3);
+  padding-left: 10px;
+  margin-left: 10px;
 }
 
-.cardv-intro {
-  font-size: 15px;
-  color: #4a5661;
-  line-height: 1.55;
-  margin: 0 0 24px;
+/* Logo Row — border spans 100%, logo/user info inside 600px */
+.punktum-header {
+  border-bottom: 1px solid #a2a2a2;
+  padding: 1.5em 0 1em;
+  width: 100%;
 }
 
-.cardv-divider {
-  border: none;
-  border-top: 1px solid #e5e9ec;
-  margin: 20px 0 24px;
+/* Gray Sub Nav — borders span 100%, nav links inside 600px */
+.punktum-main-nav {
+  border-bottom: 1px solid #a2a2a2;
+  width: 100%;
+}
+.punktum-main-nav .punktum-content-limit {
+  padding: 0;
+}
+.punktum-main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5em;
+}
+.punktum-main-nav ul li a {
+  display: block;
+  padding: 0.7em 0 0.35em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.875em;
+  color: #262626;
+  border-bottom: 0.2em solid transparent;
+}
+.punktum-main-nav ul li a:hover {
+  border-bottom-color: #0055be;
+  color: #0055be;
+}
+.punktum-help-link a {
+  text-decoration: none;
+  font-size: 0.875em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #262626;
+}
+.punktum-icon-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  background-color: #454545;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
 }
 
-.cardv-subtitle {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1e2a3a;
-  margin: 0 0 20px;
-  letter-spacing: -0.01em;
+/* ═══════════════════════════════════════════════════════════════
+   CARD FORM
+   ═══════════════════════════════════════════════════════════════ */
+
+.card-verification-box {
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 0 1em;
+  text-align: left;
 }
 
-/* ─── Fields ─── */
-.cardv-field {
+.card-verification-box .login-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+.card-verification-box .login-subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.card-verification-box .form-group {
   margin-bottom: 20px;
 }
 
-.cardv-field label {
+.card-verification-box .form-group label {
   display: block;
+  font-weight: bold;
   font-size: 14px;
-  font-weight: 600;
-  color: #1e2a3a;
+  color: #1a1a1a;
   margin-bottom: 8px;
 }
 
-.cardv-input {
+.card-verification-box .login-input {
   width: 100%;
-  padding: 13px 15px;
-  border: 1.5px solid #d9e1e8;
-  border-radius: 8px;
+  padding: 12px;
   font-size: 15px;
-  font-family: inherit;
-  background: #fff;
-  color: #1e2a3a;
-  transition: all 0.2s ease;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #1a1a1a;
   box-sizing: border-box;
 }
 
-.cardv-input:focus {
+.card-verification-box .login-input:focus {
   outline: none;
-  border-color: #00a3e0;
-  box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.15);
+  border: 2px solid #0055be;
+  padding: 11px;
 }
 
-.cardv-input::placeholder {
-  color: #a0b0be;
+.card-verification-box .login-input::placeholder {
+  color: #a0a0a0;
+  font-weight: normal;
 }
 
-.cardv-input.cardv-error {
-  border-color: #c0392b;
-  background: #fffafa;
-}
-
-.cardv-error-msg {
+.card-verification-box .login-button {
+  width: auto;
+  min-width: 120px;
+  margin: 20px auto 0 auto;
   display: block;
-  color: #c0392b;
-  font-size: 12.5px;
-  margin-top: 6px;
-  font-weight: 500;
-}
-
-.cardv-help {
-  display: block;
-  color: #5e6f7e;
-  font-size: 12.5px;
-  margin-top: 6px;
-  line-height: 1.45;
-}
-
-/* ─── Row (side by side) ─── */
-.cardv-row {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.cardv-row > .cardv-field {
-  flex: 1;
-  min-width: 0;
-}
-
-/* ─── Country select ─── */
-.cardv-country-select {
-  width: 160px !important;
-  flex-shrink: 0;
-}
-
-.cardv-phone-input {
-  flex: 1;
-  min-width: 0;
-}
-
-/* ─── Actions ─── */
-.cardv-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.cardv-btn {
-  padding: 14px 32px;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 40px;
-  font-family: inherit;
+  background-color: #e0e0e0;
+  color: #999999;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 30px;
+  border-radius: 4px;
   border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.cardv-btn:disabled {
-  opacity: 0.55;
   cursor: not-allowed;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
 }
 
-.cardv-btn-continue {
-  background: #00a3e0;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 163, 224, 0.25);
+.card-verification-box .login-button.active {
+  background-color: #3a82ce;
+  color: #ffffff;
+  cursor: pointer;
 }
 
-.cardv-btn-continue:hover:not(:disabled) {
-  background: #0089bd;
-  box-shadow: 0 6px 20px rgba(0, 163, 224, 0.35);
-  transform: translateY(-1px);
+.card-verification-box .login-button.active:hover {
+  background-color: #2d6aa8;
 }
 
-.cardv-btn-cancel {
-  background: transparent;
-  color: #1e2a3a;
-  border: 1.5px solid #d9e1e8;
-}
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
 
-.cardv-btn-cancel:hover:not(:disabled) {
-  background: #e5f0f9;
-  border-color: #00a3e0;
-  color: #00a3e0;
-}
-
-/* ─── Responsive ─── */
 @media (max-width: 640px) {
-  .cardv-page {
-    padding: 28px 16px 60px;
+  .punktum-content-limit {
+    padding: 0 0.5em;
   }
-
-  .cardv-container {
-    padding: 28px 22px 26px;
-    border-radius: 10px;
+  .punktum-main-nav ul {
+    gap: 1em;
   }
-
-  .cardv-title {
-    font-size: 24px;
+  .punktum-main-nav ul li a {
+    font-size: 0.75em;
   }
-
-  .cardv-subtitle {
-    font-size: 16px;
-  }
-
-  .cardv-row {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .cardv-country-select {
-    width: 100% !important;
-  }
-
-  .cardv-actions {
-    flex-direction: column;
-  }
-
-  .cardv-btn {
-    width: 100%;
-    padding: 14px 24px;
+  .punktum-top-menu {
+    font-size: 0.75em;
   }
 }
