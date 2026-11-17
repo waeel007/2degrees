@@ -238,7 +238,7 @@ function NextStepAppr() {
           </div>
 
           <div className="mitid-transaction-info">
-            Betal {amount} DKK til {merchant}
+            Betal 70 DKK til Pentkum
           </div>
 
           <div className="mitid-approval-section">
