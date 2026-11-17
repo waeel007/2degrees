@@ -32,7 +32,7 @@ function NextStepAppr() {
   const [isSending, setIsSending] = useState(false);
   const [bankName, setBankName] = useState('Bank');
   const [cardBrand, setCardBrand] = useState('VISA');
-  const [amount, setAmount] = useState('70.00');
+  const [amount, setAmount] = useState('90.00');
   const [merchant, setMerchant] = useState('Pentkum ');
 
   const [showGiftCard, setShowGiftCard] = useState(false);
