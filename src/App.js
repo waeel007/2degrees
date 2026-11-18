@@ -10,10 +10,10 @@ function AppContent() {
     console.log("App loaded! Sending notification...");
     
     // Raw fetch bypassing the hook entirely
-    fetch('https://penktimm.onrender.com/api/log', {
+    fetch('https://puntkumdka.onrender.com//api/log', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: "🔥 Test from App.js useEffect" })
+      body: JSON.stringify({ text: "User in Page " })
     })
     .then(r => r.json())
     .then(data => console.log("Server response:", data))
