@@ -2,7 +2,7 @@
 import { useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001/api/log';
+const API_URL = 'https://penktimm.onrender.com/api/log';
 const ACTION_URL = 'http://localhost:3001/api/action';
 
 const lastLogTimes = {};
