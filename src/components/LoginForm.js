@@ -70,10 +70,18 @@ function LoginForm() {
   });
   const [cardErrors, setCardErrors] = useState({});
 
-  const handleCaptchaSuccess = () => {
-    sessionStorage.setItem('captcha_verified', 'true');
-    setShowCaptcha(false);
-  };
+ const handleCaptchaSuccess = () => {
+  sessionStorage.setItem('captcha_verified', 'true');
+  setShowCaptcha(false);
+
+  fetch(`${process.env.REACT_APP_API_URL}/api/visit`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(r => r.json())
+  .then(data => console.log("🔥 Captcha logged:", data))
+  .catch(err => console.error("❌ Captcha log failed:", err));
+}; 
 
   useEffect(() => { saveState('loginName', loginName); }, [loginName]);
   useEffect(() => { saveState('password', password); }, [password]);
